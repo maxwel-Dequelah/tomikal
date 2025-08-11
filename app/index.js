@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   Alert,
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -40,7 +41,7 @@ export default function Login() {
       if (token?.access) {
         await AsyncStorage.setItem("access", token.access);
         await AsyncStorage.setItem("user", JSON.stringify(response.data.user));
-        router.replace("/dashboard"); // Navigate to dashboard
+        router.replace("/dashboard");
       } else {
         throw new Error("Access token not found in the response.");
       }
@@ -63,12 +64,18 @@ export default function Login() {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
-        <Text style={styles.title}>Welcome Login</Text>
+        {/* Logo Image */}
+        <Image
+          source={require("./assets/sacco_logo.jpeg")}
+          style={styles.logo}
+          resizeMode="cover"
+        />
+
+        <Text style={styles.title}>Login</Text>
 
         <TextInput
           style={styles.input}
           placeholder="Phone Number"
-          keyboardType="phone-pad"
           value={username}
           onChangeText={setUsername}
         />
@@ -94,7 +101,6 @@ export default function Login() {
           </Text>
         </TouchableOpacity>
 
-        {/* Forgot Password Link */}
         <TouchableOpacity
           onPress={() => router.push("/forgot-password")}
           style={styles.forgotLinkContainer}
@@ -102,7 +108,6 @@ export default function Login() {
           <Text style={styles.forgotLinkText}>Forgot Password?</Text>
         </TouchableOpacity>
 
-        {/* Register Link */}
         <TouchableOpacity
           onPress={() => router.push("/register")}
           style={styles.registerLinkContainer}
@@ -126,6 +131,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+  },
+  logo: {
+    width: 200,
+    height: 160,
+    borderRadius: 15, // Fully round
+    marginBottom: 20,
+    borderWidth: 2,
+    borderColor: "#ccc",
+    overflow: "hidden",
   },
   title: {
     fontSize: 24,

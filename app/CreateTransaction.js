@@ -20,6 +20,7 @@ export default function CreateTransaction() {
   const [selectedUser, setSelectedUser] = useState("");
   const [amount, setAmount] = useState("");
   const [transactionType, setTransactionType] = useState("deposit");
+  const [fromSource, setFromSource] = useState("cash"); // New
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -53,29 +54,9 @@ export default function CreateTransaction() {
     fetchData();
   }, []);
 
-  const handleLogout = async () => {
-    Alert.alert("Logout", "Are you sure you want to logout?", [
-      { text: "Cancel", style: "cancel" },
-      {
-        text: "Logout",
-        onPress: async () => {
-          try {
-            await AsyncStorage.clear();
-            router.replace("/login");
-          } catch {
-            Alert.alert("Error", "Failed to logout");
-          }
-        },
-      },
-    ]);
-  };
-
   const handleSubmit = async () => {
     if (!selectedUser || !amount || isNaN(parseFloat(amount))) {
-      Alert.alert(
-        "Validation Error",
-        "Please select a user and enter a valid amount."
-      );
+      Alert.alert("Validation Error", "Please fill in all fields correctly.");
       return;
     }
 
@@ -87,16 +68,17 @@ export default function CreateTransaction() {
         user: selectedUser,
         amount: parseFloat(amount),
         transaction_type: transactionType,
+        from_source: fromSource, // Include source of funds
       };
 
-      await axios.post(`${apiUrl}/api/transactions/`, payload, {
+      await axios.post(`${apiUrl}/api/transactions/create/`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
 
-      Alert.alert("Success", "Transaction created and sent for approval.");
+      Alert.alert("Success", "Transaction created. Awaiting approval.");
       router.push("/dashboard");
     } catch (error) {
       console.error(error);
@@ -107,11 +89,8 @@ export default function CreateTransaction() {
     }
   };
 
-  const handleBack = () => router.push("/dashboard");
-
   return (
     <View style={styles.page}>
-      {/* Sticky Header */}
       <View style={styles.stickyHeader}>
         <ImageBackground
           source={require("./assets/sacco_logo.jpeg")}
@@ -120,15 +99,22 @@ export default function CreateTransaction() {
           <Text style={styles.headerTitle}>Tomikal SHG</Text>
           <Text style={styles.accountText}>{user?.username}</Text>
           <Text style={styles.accountNumber}>
-            {user ? user.id.toUpperCase() : "Loading..."}
+            {user
+              ? `${user.first_name.toUpperCase()} ${user.last_name.toUpperCase()}`
+              : "waiting"}
           </Text>
-          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <TouchableOpacity
+            style={styles.logoutButton}
+            onPress={async () => {
+              await AsyncStorage.clear();
+              router.replace("/login");
+            }}
+          >
             <Text style={styles.logoutText}>Logout</Text>
           </TouchableOpacity>
         </ImageBackground>
       </View>
 
-      {/* Main Content */}
       <ScrollView contentContainerStyle={styles.container}>
         {loading ? (
           <View style={styles.loadingContainer}>
@@ -143,7 +129,7 @@ export default function CreateTransaction() {
             <View style={styles.pickerWrapper}>
               <Picker
                 selectedValue={selectedUser}
-                onValueChange={(itemValue) => setSelectedUser(itemValue)}
+                onValueChange={setSelectedUser}
               >
                 <Picker.Item label="-- Select User --" value="" />
                 {users.map((u) => (
@@ -169,11 +155,19 @@ export default function CreateTransaction() {
             <View style={styles.pickerWrapper}>
               <Picker
                 selectedValue={transactionType}
-                onValueChange={(itemValue) => setTransactionType(itemValue)}
+                onValueChange={setTransactionType}
               >
                 <Picker.Item label="Deposit" value="deposit" />
                 <Picker.Item label="Withdrawal" value="withdrawal" />
                 <Picker.Item label="Emergency Deposit" value="emergency" />
+              </Picker>
+            </View>
+
+            <Text style={styles.label}>Source of Funds</Text>
+            <View style={styles.pickerWrapper}>
+              <Picker selectedValue={fromSource} onValueChange={setFromSource}>
+                <Picker.Item label="Cash" value="cash" />
+                <Picker.Item label="M-Pesa" value="mpesa" />
               </Picker>
             </View>
 
@@ -184,22 +178,20 @@ export default function CreateTransaction() {
         )}
       </ScrollView>
 
-      {/* Bottom Back Button */}
-      <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-        <Text style={styles.backButtonText}> Back to Dashboard</Text>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => router.push("/dashboard")}
+      >
+        <Text style={styles.backButtonText}>Back to Dashboard</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  stickyHeader: {
-    zIndex: 10,
-  },
+  // same as previous with added spacing tweaks if needed
+  page: { flex: 1, backgroundColor: "#fff" },
+  stickyHeader: { zIndex: 10 },
   headerBackground: {
     width: "100%",
     height: 180,
@@ -207,20 +199,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "relative",
   },
-  headerTitle: {
-    color: "#fff",
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  accountText: {
-    color: "#fff",
-    fontSize: 18,
-  },
-  accountNumber: {
-    color: "#fff",
-    fontSize: 16,
-    marginTop: 5,
-  },
+  headerTitle: { color: "#fff", fontSize: 24, fontWeight: "bold" },
+  accountText: { color: "#fff", fontSize: 18 },
+  accountNumber: { color: "#fff", fontSize: 16, marginTop: 5 },
   logoutButton: {
     position: "absolute",
     top: 40,
@@ -229,31 +210,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#e53e3e",
     borderRadius: 5,
   },
-  logoutText: {
-    color: "#fff",
-    fontSize: 14,
-  },
-
+  logoutText: { color: "#fff", fontSize: 14 },
   container: {
     padding: 20,
     backgroundColor: "#fff",
     flexGrow: 1,
-    paddingBottom: 120, // enough space for back button
+    paddingBottom: 120,
   },
-  loadingContainer: {
-    marginTop: 50,
-    alignItems: "center",
-  },
+  loadingContainer: { marginTop: 50, alignItems: "center" },
   title: {
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
   },
-  label: {
-    fontWeight: "600",
-    marginTop: 10,
-  },
+  label: { fontWeight: "600", marginTop: 10 },
   pickerWrapper: {
     borderWidth: 1,
     borderColor: "#ccc",
@@ -274,11 +245,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: "center",
   },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
+  buttonText: { color: "#fff", fontWeight: "bold", fontSize: 16 },
   backButton: {
     position: "absolute",
     bottom: 40,
@@ -289,8 +256,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
   },
-  backButtonText: {
-    color: "#fff",
-    fontSize: 15,
-  },
+  backButtonText: { color: "#fff", fontSize: 15 },
 });

@@ -65,7 +65,7 @@ const Dashboard = () => {
 
     if (user.is_secretary) {
       cards.push(
-        { icon: "✅", title: "Approve Users", screen: "/ApproveUsersScreen" },
+        { icon: "✅", title: "Approve Users", screen: "/approvetransuctions" },
         {
           icon: "🧾",
           title: "CreateTransaction",
@@ -73,7 +73,7 @@ const Dashboard = () => {
         },
         {
           icon: "➕",
-          title: "Capture Loans",
+          title: "Capture Transactions",
           screen: "/CreateTransaction",
         }
       );
@@ -83,10 +83,14 @@ const Dashboard = () => {
       cards.push(
         {
           icon: "✔️",
-          title: "Approve Transactions",
+          title: "Approve Loans",
           screen: "/TransactionApproval",
         },
-        { icon: "✔️", title: "Approve Loans", screen: "/ApproveTransaction" }
+        {
+          icon: "✔️",
+          title: "Approve Transactions",
+          screen: "/ApproveTransuctions",
+        }
       );
     }
 
