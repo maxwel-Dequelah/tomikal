@@ -5,15 +5,27 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.exceptions import ValidationError
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
 
 from ..models import User, Transaction, Balance, Loan, EmergencyFund
 from .serializers import (
     RegisterSerializer, LoginSerializer, UserSerializer, UpdateProfileSerializer,
     TransactionSerializer, BalanceSerializer,
     LoanSerializer,
-    EmergencyFundSerializer
+    EmergencyFundSerializer,
+    UserApprovalSerializer,
+    PendingUserSerializer
 )
 
+
+# pending user approval
+
+class PendingUsersListView(generics.ListAPIView):
+    serializer_class = PendingUserSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(is_active=False, is_approved=False)
+    
 # Helper for token generation
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
@@ -70,6 +82,19 @@ class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
+
+
+# users approve view
+class ApproveOrRejectUserView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserApprovalSerializer
+
+    def update(self, request, *args, **kwargs):
+        user = get_object_or_404(User, pk=kwargs.get("pk"))
+        serializer = self.get_serializer(user, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"detail": "Action processed successfully."}, status=status.HTTP_200_OK)
 
 # Transaction List View (Admin or User)
 class TransactionListView(generics.ListAPIView):

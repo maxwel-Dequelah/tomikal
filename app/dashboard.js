@@ -65,11 +65,11 @@ const Dashboard = () => {
 
     if (user.is_secretary) {
       cards.push(
-        { icon: "✅", title: "Approve Users", screen: "/approvetransuctions" },
+        { icon: "✅", title: "Approve Users", screen: "/ApproveUsers" },
         {
           icon: "🧾",
           title: "CreateTransaction",
-          screen: "/CacreateTransaction",
+          screen: "/CreateTransaction",
         },
         {
           icon: "➕",

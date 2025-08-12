@@ -1,23 +1,28 @@
 from django.urls import path
 from .api.views import (
-    RegisterView, LoginView,
+    ApproveOrRejectUserView, RegisterView, LoginView,
     UpdateProfileView, UserListView,
     TransactionListView, TransactionCreateView, UserTransactionListView,
     BalanceRetrieveUpdateView,
     LoanRequestView, LoanListView, LoanApproveView,
     EmergencyFundView, EmergencyFundAdminView,
     TransactionUpdateView,
-    PasswordResetRequestView, PasswordResetConfirmView
+    PasswordResetRequestView, PasswordResetConfirmView,
+    PendingUsersListView
 )
 
 urlpatterns = [
     # Authentication
     path('signup/', RegisterView.as_view(), name='signup'),
     path('login/', LoginView.as_view(), name='login'),
-
+    # path('users/<int:pk>/approve/', ApproveUserView.as_view(), name='approve-user'),
     # User Profile & List
     path('users/<str:pk>/update/', UpdateProfileView.as_view(), name='update-profile'),
     path('users/', UserListView.as_view(), name='user-list'),
+    path('users/pending/', PendingUsersListView.as_view(), name='pending-users'),
+    path('users/approve/<str:pk>/', ApproveOrRejectUserView.as_view(), name='approve-reject-user'),
+    # path('users/<str:pk>/reject/', ApproveUserView.as_view(), name='reject-user'),
+
 
     # Transactions
     path('transactions/', TransactionListView.as_view(), name='transaction-list'),

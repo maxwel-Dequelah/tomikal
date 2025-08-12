@@ -95,6 +95,28 @@ class TransactionSerializer(serializers.ModelSerializer):
         return Transaction.objects.create(**validated_data)
 
 
+# User Approval Serializer
+class UserApprovalSerializer(serializers.Serializer):
+    action = serializers.ChoiceField(choices=["approve", "reject"])
+
+    def update(self, instance, validated_data):
+        action = validated_data.get("action")
+
+        if action == "approve":
+            instance.is_active = True
+            instance.is_approved = True
+            instance.save()
+        elif action == "reject":
+            instance.delete()
+
+        return instance
+
+# pending user approval serializer
+class PendingUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
+
 # 🔄 NEW Serializer to Approve Transaction and Update Balance
 class TransactionStatusUpdateSerializer(serializers.ModelSerializer):
     class Meta:

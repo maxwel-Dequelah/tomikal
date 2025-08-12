@@ -13,6 +13,8 @@ import {
 } from "react-native";
 
 export default function Register({ navigation }) {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -40,9 +42,9 @@ export default function Register({ navigation }) {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(`${apiUrl}/api/signup/`, formData);
+      await axios.post(`${apiUrl}/api/signup/`, formData);
       Alert.alert("Success", "Registered successfully!");
-      navigation.navigate("login");
+      navigation.navigate("Login");
     } catch (error) {
       const errorMessages =
         error.response && error.response.data
@@ -135,7 +137,7 @@ export default function Register({ navigation }) {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => router.replace("/login")}
         style={styles.loginLink}
       >
         <Text style={styles.loginText}>Already have an account? Login</Text>
@@ -152,11 +154,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#fff",
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
+  title: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
   input: {
     width: "80%",
     padding: 10,
@@ -177,12 +175,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#fff",
   },
-  icon: {
-    marginRight: 10,
-  },
-  dateText: {
-    flex: 1,
-  },
+  icon: { marginRight: 10 },
+  dateText: { flex: 1 },
   button: {
     width: "80%",
     padding: 15,
@@ -190,20 +184,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
   },
-  buttonEnabled: {
-    backgroundColor: "#38a169",
-  },
-  buttonDisabled: {
-    backgroundColor: "#aaa",
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  loginLink: {
-    marginTop: 20,
-  },
+  buttonEnabled: { backgroundColor: "#38a169" },
+  buttonDisabled: { backgroundColor: "#aaa" },
+  buttonText: { color: "#fff", fontWeight: "bold", fontSize: 16 },
+  loginLink: { marginTop: 20 },
   loginText: {
     color: "#1e90ff",
     textDecorationLine: "underline",
