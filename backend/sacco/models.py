@@ -75,6 +75,10 @@ class Transaction(models.Model):
         ('approved', 'Approved'),
         ('rejected', 'Rejected'),
     ]
+    SOURCE_CHOICES = [
+        ('M-pesa', 'M-pesa'),
+        ('Cash', 'Cash'),
+    ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -84,6 +88,7 @@ class Transaction(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='created_transactions')
     balance_after = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    source = models.CharField(max_length=20, choices=SOURCE_CHOICES, default='M-pesa')
 
     def __str__(self):
         return f"{self.user.username} - {self.transaction_type} - {self.amount} ({self.status})"

@@ -15,13 +15,13 @@ urlpatterns = [
     # Authentication
     path('signup/', RegisterView.as_view(), name='signup'),
     path('login/', LoginView.as_view(), name='login'),
-    # path('users/<int:pk>/approve/', ApproveUserView.as_view(), name='approve-user'),
+    
     # User Profile & List
     path('users/<str:pk>/update/', UpdateProfileView.as_view(), name='update-profile'),
     path('users/', UserListView.as_view(), name='user-list'),
     path('users/pending/', PendingUsersListView.as_view(), name='pending-users'),
     path('users/approve/<str:pk>/', ApproveOrRejectUserView.as_view(), name='approve-reject-user'),
-    # path('users/<str:pk>/reject/', ApproveUserView.as_view(), name='reject-user'),
+    
 
 
     # Transactions

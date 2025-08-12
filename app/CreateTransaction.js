@@ -20,7 +20,7 @@ export default function CreateTransaction() {
   const [selectedUser, setSelectedUser] = useState("");
   const [amount, setAmount] = useState("");
   const [transactionType, setTransactionType] = useState("deposit");
-  const [fromSource, setFromSource] = useState("cash"); // New
+  const [fromSource, setFromSource] = useState("Cash"); // New
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -68,7 +68,7 @@ export default function CreateTransaction() {
         user: selectedUser,
         amount: parseFloat(amount),
         transaction_type: transactionType,
-        from_source: fromSource, // Include source of funds
+        source: fromSource, // Include source of funds
       };
 
       await axios.post(`${apiUrl}/api/transactions/create/`, payload, {
@@ -163,11 +163,11 @@ export default function CreateTransaction() {
               </Picker>
             </View>
 
-            <Text style={styles.label}>Source of Funds</Text>
+            <Text style={styles.label}>Received as/via </Text>
             <View style={styles.pickerWrapper}>
               <Picker selectedValue={fromSource} onValueChange={setFromSource}>
-                <Picker.Item label="Cash" value="cash" />
-                <Picker.Item label="M-Pesa" value="mpesa" />
+                <Picker.Item label="Cash" value="Cash" />
+                <Picker.Item label="M-Pesa" value="M-pesa" />
               </Picker>
             </View>
 
