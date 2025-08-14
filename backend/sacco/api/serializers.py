@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.contrib.auth import authenticate
-from ..models import User, Transaction, Balance, EmergencyFund, Loan, LoanGuarantor, PasswordResetOTP
+from ..models import User, Transaction, Balance, EmergencyFund, LoanRequest, PasswordResetOTP
 
 
 # User Serializer
@@ -105,6 +105,7 @@ class UserApprovalSerializer(serializers.Serializer):
         if action == "approve":
             instance.is_active = True
             instance.is_approved = True
+            instance.date_Approved = timezone.now()
             instance.save()
         elif action == "reject":
             instance.delete()
@@ -149,55 +150,97 @@ class EmergencyFundSerializer(serializers.ModelSerializer):
         model = EmergencyFund
         fields = ['user', 'amount']
 
+# ==================================================== Loan Serializers ====================================================
 
-# Loan Guarantor Serializer
 class LoanGuarantorSerializer(serializers.ModelSerializer):
-    guarantor = UserSerializer(read_only=True)
-
-    class Meta:
-        model = LoanGuarantor
-        fields = ['guarantor']
-
-
-# Loan Serializer
-class LoanSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    approved_by = UserSerializer(read_only=True)
-    guarantors = LoanGuarantorSerializer(source='loanguarantor_set', many=True, read_only=True)
-    total_due = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Loan
-        fields = [
-            'id', 'user', 'amount', 'interest_rate', 'period_months',
-            'status', 'approved_by', 'date_requested', 'date_approved',
-            'guarantors', 'total_due'
-        ]
-        read_only_fields = ['status', 'approved_by', 'date_approved', 'total_due']
-
-    def get_total_due(self, obj):
-        return obj.calculate_due_amount()
-
-    def validate(self, data):
-        if data['amount'] <= 0:
-            raise serializers.ValidationError("Loan amount must be positive.")
-        return data
-
-    def create(self, validated_data):
-        validated_data['user'] = self.context['request'].user
-        return Loan.objects.create(**validated_data)
-
-
-# Update Profile Serializer
-class UpdateProfileSerializer(serializers.ModelSerializer):
+    """Serializer for displaying guarantor details inside Loan"""
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'dob', 'email']
+        fields = ["id", "username", "email", "first_name", "last_name"]
+
+
+class LoanSerializer(serializers.ModelSerializer):
+    """Main Loan serializer for listing and retrieving loans"""
+    requested_by = serializers.StringRelatedField()
+    borrower = serializers.StringRelatedField()
+
+
+
+    class Meta:
+        model = LoanRequest
+        fields = "__all__"
+      
+
+
+class LoanCreateSerializer(serializers.ModelSerializer):
+    """Serializer for secretary or user to request a loan"""
+    guarantor1_id = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        source="guarantor1",
+        write_only=True,
+        required=False
+    )
+    guarantor2_id = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        source="guarantor2",
+        write_only=True,
+        required=False
+    )
+
+    class Meta:
+        model = LoanRequest
+        fields = ["borrower", "amount", "guarantor1_id", "guarantor2_id"]
+
+    def create(self, validated_data):
+        request_user = self.context["request"].user
+        validated_data["requested_by"] = request_user
+        return LoanRequest.objects.create(**validated_data)
+    
+
+class LoanApprovalSerializer(serializers.Serializer):
+    """Serializer for treasurer to approve or reject a loan"""
+    action = serializers.ChoiceField(choices=["approve", "reject"])
+
+    def update(self, instance, validated_data):
+        action = validated_data["action"]
+
+        if action == "approve":
+            instance.status = "approved"
+        elif action == "reject":
+            instance.status = "rejected"
+
+        instance.save()
+        return instance
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ==================================== Password Reset Serializers ===============================================
 
 class PasswordResetRequestSerializer(serializers.Serializer):
     phone = serializers.CharField()
@@ -234,3 +277,19 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         data["user"] = user
         data["otp_obj"] = otp_obj
         return data
+    
+# ==================================== UpdateProfileSerializer ===============================================
+class UpdateProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'phoneNumber', 'dob', 'email']
+        read_only_fields = ['is_active', 'is_approved']
+
+    def update(self, instance, validated_data):
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.phoneNumber = validated_data.get('phoneNumber', instance.phoneNumber)
+        instance.dob = validated_data.get('dob', instance.dob)
+        instance.email = validated_data.get('email', instance.email)
+        instance.save()
+        return instance

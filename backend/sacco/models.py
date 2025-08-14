@@ -1,6 +1,6 @@
 import base64
 import uuid
-from decimal import Decimal
+from decimal import Decimal, ROUND_UP
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.validators import MinValueValidator
+from django.conf import settings
 
 
 def generate_short_uuid():
@@ -29,6 +30,7 @@ class User(AbstractUser):
     is_secretary = models.BooleanField(default=False)
     is_tresurer = models.BooleanField(default=False)  # Corrected typo here
     is_approved = models.BooleanField(default=False)  # Approval flag
+    date_Approved = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.first_name} - {self.username}"
@@ -111,55 +113,140 @@ class Transaction(models.Model):
         self.save()
 
 
-class Loan(models.Model):
+
+
+# ==================================================# Loan Models==================================================
+
+class LoanRequest(models.Model):
     STATUS_CHOICES = [
-        ('waiting', 'Waiting for Approval'),
-        ('performing', 'Performing'),
-        ('paid', 'Paid'),
+        ('pending_guarantors', 'Pending Guarantor Confirmation'),
+        ('pending_treasurer', 'Pending Treasurer Approval'),
+        ('approved', 'Approved'),
         ('rejected', 'Rejected'),
+        ('cancelled', 'Cancelled'),
     ]
 
-    REPAYMENT_PERIOD_CHOICES = [(i, f"{i} months") for i in [3, 4, 5, 6]]
+    requested_by = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='loan_requests_made',
+        help_text="The user who initiated the loan request."
+    )
+    borrower = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='loan_requests_received',
+        help_text="The member for whom the loan is being requested."
+    )
+    amount = models.DecimalField(max_digits=12, decimal_places=2)
+    purpose = models.TextField()
+    guarantor1 = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='guaranteed_loans_as_g1'
+    )
+    guarantor2 = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='guaranteed_loans_as_g2'
+    )
+    guarantor1_confirmed = models.BooleanField(default=False)
+    guarantor2_confirmed = models.BooleanField(default=False)
+    treasurer_approved = models.BooleanField(default=False)
+    treasurer_rejected = models.BooleanField(default=False)
+    status = models.CharField(
+        max_length=30,
+        choices=STATUS_CHOICES,
+        default='pending_guarantors'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    def clean(self):
+        errors = {}
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    interest_rate = models.DecimalField(max_digits=4, decimal_places=2, default=1.5)  # Monthly rate in percent
-    period_months = models.IntegerField(choices=REPAYMENT_PERIOD_CHOICES)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='waiting')
-    approved_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name='approved_loans')
-    date_requested = models.DateTimeField(default=timezone.now)
-    date_approved = models.DateTimeField(null=True, blank=True)
+        # Ensure both guarantors are provided
+        if not self.guarantor1 or not self.guarantor2:
+            errors['guarantor1'] = "Two guarantors are required."
+            errors['guarantor2'] = "Two guarantors are required."
 
-    def calculate_due_amount(self):
-        """Calculates total due with monthly compounding interest on reducing balance."""
-        principal = self.amount
-        balance = principal
-        monthly_rate = self.interest_rate / Decimal(100)
-        total_payment = Decimal('0.00')
+        # Ensure guarantors are not the same person
+        if self.guarantor1 and self.guarantor2 and self.guarantor1 == self.guarantor2:
+            errors['guarantor2'] = "Guarantor 1 and Guarantor 2 must be different people."
 
-        for _ in range(self.period_months):
-            interest = balance * monthly_rate
-            payment = (principal / self.period_months) + interest
-            balance -= (principal / self.period_months)
-            total_payment += payment
-        return round(total_payment, 2)
+        # Ensure neither guarantor is a treasurer or secretary
+        restricted_roles = ['treasurer', 'secretary']
+        if self.guarantor1 and self.guarantor1.role in restricted_roles:
+            errors['guarantor1'] = "Treasurer or Secretary cannot be a guarantor."
+        if self.guarantor2 and self.guarantor2.role in restricted_roles:
+            errors['guarantor2'] = "Treasurer or Secretary cannot be a guarantor."
 
-    def approve(self, treasurer):
-        if self.status != 'waiting':
-            raise ValidationError("Loan already processed.")
-        self.status = 'performing'
-        self.approved_by = treasurer
-        self.date_approved = timezone.now()
+        # Ensure applicant is not their own guarantor
+        if self.applicant in [self.guarantor1, self.guarantor2]:
+            errors['guarantor1'] = "Applicant cannot be their own guarantor."
+            errors['guarantor2'] = "Applicant cannot be their own guarantor."
+
+        if errors:
+            raise ValidationError(errors)
+        
+    def update_status(self):
+        """Move the loan request through stages."""
+        if self.guarantor1_confirmed and self.guarantor2_confirmed:
+            self.status = 'pending_treasurer'
+        if self.treasurer_approved:
+            self.status = 'approved'
+        elif self.treasurer_rejected:
+            self.status = 'rejected'
         self.save()
 
+    def __str__(self):
+        return f"Loan #{self.id} for {self.borrower} - {self.amount}"
 
-class LoanGuarantor(models.Model):
-    loan = models.ForeignKey(Loan, on_delete=models.CASCADE, related_name='loanguarantor_set')
-    guarantor = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class LoanRepayment(models.Model):
+    loan = models.ForeignKey(
+        LoanRequest,
+        on_delete=models.CASCADE,
+        related_name='repayments'
+    )
+    amount_paid = models.DecimalField(max_digits=12, decimal_places=2)
+    payment_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.guarantor.username} guarantees Loan {self.loan.id}"
+        return f"Repayment {self.amount_paid} for Loan #{self.loan.id}"
+
+
+class LoanGuarantorAction(models.Model):
+    loan = models.ForeignKey(
+        LoanRequest,
+        on_delete=models.CASCADE,
+        related_name='guarantor_actions'
+    )
+    guarantor = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='guarantor_actions'
+    )
+    confirmed = models.BooleanField()
+    action_date = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        """Update the loan request when both guarantors have confirmed."""
+        super().save(*args, **kwargs)
+        loan = self.loan
+        if loan.guarantor1 == self.guarantor:
+            loan.guarantor1_confirmed = self.confirmed
+        elif loan.guarantor2 == self.guarantor:
+            loan.guarantor2_confirmed = self.confirmed
+        loan.update_status()
+
+    def __str__(self):
+        return f"Guarantor {self.guarantor} {'confirmed' if self.confirmed else 'declined'} Loan #{self.loan.id}"
+
+
+
+
+
+
+
 
 
 # Signals

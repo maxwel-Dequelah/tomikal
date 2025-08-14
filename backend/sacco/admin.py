@@ -5,3 +5,8 @@ admin.site.register(User)
 admin.site.register(Transaction)
 admin.site.register(Balance)
 admin.site.register(EmergencyFund)
+from .models import LoanRequest, LoanRepayment
+admin.site.register(LoanRequest)
+admin.site.register(LoanRepayment)
+
+

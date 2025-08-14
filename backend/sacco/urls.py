@@ -1,21 +1,24 @@
 from django.urls import path
 from .api.views import (
-    ApproveOrRejectUserView, RegisterView, LoginView,
+    ApproveOrRejectUserView, LoanApprovalView, LoanListView, RegisterView, LoginView,
     UpdateProfileView, UserListView,
     TransactionListView, TransactionCreateView, UserTransactionListView,
     BalanceRetrieveUpdateView,
-    LoanRequestView, LoanListView, LoanApproveView,
     EmergencyFundView, EmergencyFundAdminView,
     TransactionUpdateView,
     PasswordResetRequestView, PasswordResetConfirmView,
-    PendingUsersListView
+    PendingUsersListView,
+    # Also add this if not already imported
+    LoanCreateView,            # Import LoanCreateView to fix the error
+    LoanEligibilityView,       # Import LoanEligibilityView to fix the error
+    LoanAdminListView          # Import LoanAdminListView to fix the error
 )
 
 urlpatterns = [
     # Authentication
     path('signup/', RegisterView.as_view(), name='signup'),
     path('login/', LoginView.as_view(), name='login'),
-    
+
     # User Profile & List
     path('users/<str:pk>/update/', UpdateProfileView.as_view(), name='update-profile'),
     path('users/', UserListView.as_view(), name='user-list'),
@@ -34,9 +37,15 @@ urlpatterns = [
     path('balance/', BalanceRetrieveUpdateView.as_view(), name='balance'),
 
     # Loans
-    path('loans/request/', LoanRequestView.as_view(), name='loan-request'),
-    path('loans/', LoanListView.as_view(), name='loan-list'),
-    path('loans/<int:pk>/approve/', LoanApproveView.as_view(), name='loan-approve'),
+   path('loans/request/', LoanCreateView.as_view(), name='loan-create'),
+   path("loans/", LoanListView.as_view(), name="loan-list"),
+   path("loans-admin-view/", LoanAdminListView.as_view(), name="loan-admin-list"),
+
+    path('loans/<int:pk>/approve/', LoanApprovalView.as_view(), name='loan-approval'),
+    path('loan/eligibility/', LoanEligibilityView.as_view(), name='loan-eligibility'),
+
+
+
 
     # Emergency Funds
     path('emergency-funds/request/', EmergencyFundView.as_view(), name='emergency-fund-request'),

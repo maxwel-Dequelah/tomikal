@@ -6,18 +6,19 @@ from rest_framework.exceptions import ValidationError
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
+from django.conf import settings
+from django.core.exceptions import PermissionDenied
 
-from ..models import User, Transaction, Balance, Loan, EmergencyFund
+from ..models import User, Transaction, Balance, LoanRequest, EmergencyFund
 from .serializers import (
-    RegisterSerializer, LoginSerializer, UserSerializer, UpdateProfileSerializer,
+    LoanApprovalSerializer, RegisterSerializer, LoginSerializer, UserSerializer, UpdateProfileSerializer,
     TransactionSerializer, BalanceSerializer,
-    LoanSerializer,
     EmergencyFundSerializer,
     UserApprovalSerializer,
-    PendingUserSerializer
+    PendingUserSerializer,
+    LoanSerializer,
+    LoanCreateSerializer
 )
-
-
 # pending user approval
 
 class PendingUsersListView(generics.ListAPIView):
@@ -170,40 +171,149 @@ class BalanceRetrieveUpdateView(generics.RetrieveUpdateAPIView):
         # Assumes Balance object always exists due to signals
         return self.request.user.balance
 
-# Loan Views
-class LoanRequestView(generics.CreateAPIView):
-    serializer_class = LoanSerializer
+# ============================================Loan ==================================================================
+
+class LoanCreateView(generics.CreateAPIView):
+    """
+    Secretary can request a loan for themselves or on behalf of another user.
+    """
+    serializer_class = LoanCreateSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user, status='waiting', date_requested=timezone.now())
+        # If secretary is creating on behalf of someone else, 'user' is passed in request data
+        target_user_id = self.request.data.get("user")
+        if target_user_id:
+            # Treasurer can also use this endpoint if needed
+            target_user = get_object_or_404(User, id=target_user_id)
+        else:
+            # Default to logged in user
+            target_user = self.request.user
+
+        serializer.save(borrower=target_user, requested_by=self.request.user,)
+
 
 class LoanListView(generics.ListAPIView):
+    """
+    Default loan list:
+    - Treasurer & Secretary: see all loans
+    - Others: see only their own loans
+    """
     serializer_class = LoanSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
-        if user.is_staff or user.is_admin:
-            return Loan.objects.all().order_by('-date_requested')
-        return Loan.objects.filter(user=user).order_by('-date_requested')
+        if getattr(user, "is_treasurer", False) or getattr(user, "is_secretary", False):
+            return LoanRequest.objects.all().order_by("-created_at")
+        return LoanRequest.objects.filter(user=user).order_by("-created_at")
 
-class LoanApproveView(generics.UpdateAPIView):
+
+class LoanAdminListView(generics.ListAPIView):
+    """
+    Admin loan view (only Treasurer & Secretary).
+    Shows all loans without restrictions.
+    """
     serializer_class = LoanSerializer
-    permission_classes = [IsAdminUser]
-    queryset = Loan.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        if getattr(user, "is_treasurer", False) or getattr(user, "is_secretary", False):
+            return LoanRequest.objects.all().order_by("-created_at")
+        raise PermissionDenied("You are not authorized to view all loans.")
+
+
+
+
+
+class LoanApprovalView(generics.UpdateAPIView):
+    """
+    Treasurer approves or rejects a loan request.
+    """
+    serializer_class = LoanApprovalSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return LoanRequest.objects.filter(status="Pending")
 
     def update(self, request, *args, **kwargs):
         loan = self.get_object()
-        if loan.status != 'waiting':
-            return Response({"error": "Loan already processed."}, status=status.HTTP_400_BAD_REQUEST)
-        loan.status = 'performing'
-        loan.date_approved = timezone.now()
-        loan.approved_by = request.user
-        loan.save()
-        return Response(LoanSerializer(loan).data)
 
-# Emergency Fund Views
+        if request.user.role != "Treasurer":
+            return Response(
+                {"error": "Only the Treasurer can approve or reject loans."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        serializer = self.get_serializer(loan, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(approved_by=request.user)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+class LoanEligibilityView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        target_user_id = request.query_params.get("user_id")
+
+        if target_user_id:
+            try:
+                target_user = User.objects.get(id=target_user_id)
+            except User.DoesNotExist:
+                return Response(
+                    {"error": "Target user not found."},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+        else:
+            target_user = request.user
+
+        try:
+            balance = Balance.objects.get(user=target_user)
+            multiplier = getattr(settings, "LOAN_MULTIPLIER", 3)  # Default to 3x
+            eligible_amount = balance.balance * multiplier
+
+            # 🔹 Check for pending or unpaid loans
+            existing_loan = LoanRequest.objects.filter(
+                borrower=target_user
+            ).exclude(status="paid").first()
+
+            if existing_loan:
+                return Response({
+                    "user_id": target_user.id,
+                    "balance": balance.balance,
+                    "multiplier": multiplier,
+                    "eligible_amount": 0,  # Force 0 if loan exists
+                    "pending_loan_amount": existing_loan.amount,
+                    "pending_loan_status": existing_loan.status
+                })
+
+            return Response({
+                "user_id": target_user.id,
+                "balance": balance.balance,
+                "multiplier": multiplier,
+                "eligible_amount": eligible_amount
+            })
+
+        except Balance.DoesNotExist:
+            return Response(
+                {"error": "Balance record not found for the specified user."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+
+
+
+
+
+
+
+
+
+# =============================================Emergency Fund =========================================================
+# Emergency Fund Request
 class EmergencyFundView(generics.CreateAPIView):
     serializer_class = EmergencyFundSerializer
     permission_classes = [IsAuthenticated]

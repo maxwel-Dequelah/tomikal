@@ -158,3 +158,9 @@ EMAIL_HOST_USER = 'maxwelomondi56@gmail.com'  # Your Gmail address
 EMAIL_HOST_PASSWORD = 'yffjsiusviivxvql'       # App password, NOT your main Gmail password
 
 DEFAULT_FROM_EMAIL = 'maxwelomondi56@gmail.com'
+
+
+
+LOAN_SHARE_MULTIPLIER = 3  # Max loan is X times the shares
+LOAN_INTEREST_RATE = 5.0  # Annual simple interest percentage
+DEFAULT_REPAYMENT_PERIOD = 12  # Months

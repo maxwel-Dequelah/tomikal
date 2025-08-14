@@ -59,7 +59,8 @@ const Dashboard = () => {
     const cards = [
       { icon: "💰", title: "Account Balance", screen: "/AccountBalance" },
       { icon: "💼", title: "Deposits/Shares Contribs", screen: "/deposits" },
-      { icon: "📱", title: "Loan Requests", screen: "/loanRequestScreen" },
+      { icon: "📱", title: "Request for Loan", screen: "/loanrequestscreen" },
+      { icon: "📄", title: "Loan Listing", screen: "/loanlistscreen" },
       { icon: "💸", title: "Loans", screen: "/LoansScreen" },
     ];
 
