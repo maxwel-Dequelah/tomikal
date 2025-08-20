@@ -62,16 +62,17 @@ const Dashboard = () => {
       { icon: "📱", title: "Request for Loan", screen: "/loanrequestscreen" },
       { icon: "📄", title: "Loan Listing", screen: "/loanlistscreen" },
       { icon: "💸", title: "Loans", screen: "/LoansScreen" },
+      {
+        icon: "🤝",
+        title: "Guaranting Requests",
+        screen: "/guarantingrequests",
+      },
     ];
 
     if (user.is_secretary) {
       cards.push(
         { icon: "✅", title: "Approve Users", screen: "/ApproveUsers" },
-        {
-          icon: "🧾",
-          title: "CreateTransaction",
-          screen: "/CreateTransaction",
-        },
+
         {
           icon: "➕",
           title: "Capture Transactions",

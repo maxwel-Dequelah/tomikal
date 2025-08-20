@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.contrib.auth import authenticate
-from ..models import User, Transaction, Balance, EmergencyFund, LoanRequest, PasswordResetOTP
+from ..models import User, Transaction, Balance, EmergencyFund, LoanRequest, PasswordResetOTP, LoanGuarantorAction
 
 
 # User Serializer
@@ -216,7 +216,44 @@ class LoanApprovalSerializer(serializers.Serializer):
 
 
 
+# LOAN GUARANTOR SERIALIZER ACTIONS
 
+class GuarantorRequestSerializer(serializers.ModelSerializer):
+    borrower = serializers.CharField(source="borrower.username", read_only=True)
+    requested_by = serializers.CharField(source="requested_by.username", read_only=True)
+
+    class Meta:
+        model = LoanRequest
+        fields = [
+            "id",
+            "borrower",
+            "requested_by",
+            "amount",
+            "purpose",
+            "status",
+            "created_at",
+        ]
+
+
+class GuarantorDecisionSerializer(serializers.ModelSerializer):
+    decision = serializers.ChoiceField(choices=[("accept", "Accept"), ("reject", "Reject")])
+
+    class Meta:
+        model = LoanGuarantorAction
+        fields = ["decision"]
+
+    def save(self, **kwargs):
+        loan = self.instance.loan
+        guarantor = self.instance.guarantor
+        decision = self.validated_data["decision"]
+
+        confirmed = decision == "accept"
+        self.instance.confirmed = confirmed
+        self.instance.save()
+
+        # loan.update_status() will be triggered in LoanGuarantorAction.save()
+
+        return self.instance
 
 
 

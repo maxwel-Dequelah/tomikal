@@ -1,6 +1,6 @@
 from django.urls import path
 from .api.views import (
-    ApproveOrRejectUserView, LoanApprovalView, LoanListView, RegisterView, LoginView,
+    ApproveOrRejectUserView, GuarantorDecisionView, LoanApprovalView, LoanListView, RegisterView, LoginView,
     UpdateProfileView, UserListView,
     TransactionListView, TransactionCreateView, UserTransactionListView,
     BalanceRetrieveUpdateView,
@@ -11,7 +11,8 @@ from .api.views import (
     # Also add this if not already imported
     LoanCreateView,            # Import LoanCreateView to fix the error
     LoanEligibilityView,       # Import LoanEligibilityView to fix the error
-    LoanAdminListView          # Import LoanAdminListView to fix the error
+    LoanAdminListView,         # Import LoanAdminListView to fix the error
+    PendingGuarantorRequestsView
 )
 
 urlpatterns = [
@@ -43,6 +44,10 @@ urlpatterns = [
 
     path('loans/<int:pk>/approve/', LoanApprovalView.as_view(), name='loan-approval'),
     path('loan/eligibility/', LoanEligibilityView.as_view(), name='loan-eligibility'),
+    path("guarantor/requests/", PendingGuarantorRequestsView.as_view(), name="guarantor-pending"),
+
+    # Endpoint for guarantors to accept/reject a loan request
+    path("guarantor/decision/<int:loan_id>/", GuarantorDecisionView.as_view(), name="guarantor-decision"),
 
 
 

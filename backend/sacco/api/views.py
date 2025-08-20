@@ -8,16 +8,18 @@ from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 
-from ..models import User, Transaction, Balance, LoanRequest, EmergencyFund
+from ..models import LoanGuarantorAction, User, Transaction, Balance, LoanRequest, EmergencyFund
 from .serializers import (
-    LoanApprovalSerializer, RegisterSerializer, LoginSerializer, UserSerializer, UpdateProfileSerializer,
+    GuarantorRequestSerializer, LoanApprovalSerializer, RegisterSerializer, LoginSerializer, UserSerializer, UpdateProfileSerializer,
     TransactionSerializer, BalanceSerializer,
     EmergencyFundSerializer,
     UserApprovalSerializer,
     PendingUserSerializer,
     LoanSerializer,
-    LoanCreateSerializer
+    LoanCreateSerializer,
+    GuarantorDecisionSerializer
 )
 # pending user approval
 
@@ -304,7 +306,48 @@ class LoanEligibilityView(APIView):
             )
 
 
+# LOAN GUARANTOR ACTIONS
 
+class PendingGuarantorRequestsView(generics.ListAPIView):
+    serializer_class = GuarantorRequestSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return LoanRequest.objects.filter(
+            status="pending_guarantors"
+        ).filter(
+            Q(guarantor1=user, guarantor1_confirmed=False)
+            | Q(guarantor2=user, guarantor2_confirmed=False)
+        )
+
+
+class GuarantorDecisionView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, loan_id):
+        user = request.user
+
+        try:
+            loan = LoanRequest.objects.get(id=loan_id, status="pending_guarantors")
+        except LoanRequest.DoesNotExist:
+            return Response({"error": "Loan not found or not awaiting guarantors."}, status=status.HTTP_404_NOT_FOUND)
+
+        # Ensure the user is actually a guarantor
+        if user not in [loan.guarantor1, loan.guarantor2]:
+            return Response({"error": "You are not a guarantor for this loan."}, status=status.HTTP_403_FORBIDDEN)
+
+        # Find or create guarantor action record
+        action, _ = LoanGuarantorAction.objects.get_or_create(
+            loan=loan,
+            guarantor=user,
+        )
+
+        serializer = GuarantorDecisionSerializer(instance=action, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response({"message": "Decision recorded successfully."})
 
 
 

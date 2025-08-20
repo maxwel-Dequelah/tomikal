@@ -225,7 +225,11 @@ class LoanGuarantorAction(models.Model):
         on_delete=models.CASCADE,
         related_name='guarantor_actions'
     )
-    confirmed = models.BooleanField()
+    confirmed = models.BooleanField(
+    null=True,
+    default=None,
+    help_text="None = pending, True = accepted, False = rejected"
+)
     action_date = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
