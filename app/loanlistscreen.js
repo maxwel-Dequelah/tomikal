@@ -1,4 +1,4 @@
-// LoanListScreen.js
+// TransactionApprovalScreen.js
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Picker } from "@react-native-picker/picker";
@@ -16,20 +16,20 @@ import {
   View,
 } from "react-native";
 
-export default function LoanListScreen() {
+export default function TransactionApprovalScreen() {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
   const [applyForSelf, setApplyForSelf] = useState(true);
-  const [loans, setLoans] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   const [statusFilter, setStatusFilter] = useState("");
   const [loading, setLoading] = useState(true);
-  const [expandedLoans, setExpandedLoans] = useState({});
+  const [expandedTx, setExpandedTx] = useState({});
   const orgName = process.env.EXPO_PUBLIC_ORG_NAME || "waiting...";
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const router = useRouter();
 
-  const borrowerId = useMemo(() => {
+  const targetUserId = useMemo(() => {
     if (!user) return null;
     if (user.is_secretary || user.is_tresurer) {
       return applyForSelf ? user.id : selectedUser || null;
@@ -61,30 +61,30 @@ export default function LoanListScreen() {
   }, []);
 
   useEffect(() => {
-    if (borrowerId) {
-      fetchLoans(borrowerId, statusFilter);
+    if (targetUserId) {
+      fetchTransactions(targetUserId, statusFilter);
     } else {
-      setLoans([]);
+      setTransactions([]);
     }
-  }, [borrowerId, statusFilter]);
+  }, [targetUserId, statusFilter]);
 
-  const fetchLoans = async (uid, status) => {
+  const fetchTransactions = async (uid, status) => {
     if (!uid) return;
     setLoading(true);
     try {
       const token = await AsyncStorage.getItem("access");
-      let url = `${apiUrl}/api/loans/?=${uid}`;
+      let url = `${apiUrl}/api/transactions/?user=${uid}`;
       if (status) {
         url += `&status=${status}`;
       }
       const res = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setLoans(res.data.filter((l) => l.borrower.id === uid));
-      setExpandedLoans({});
+      setTransactions(res.data.filter((t) => t.user.id === uid));
+      setExpandedTx({});
     } catch (err) {
       console.error(err);
-      setLoans([]);
+      setTransactions([]);
     } finally {
       setLoading(false);
     }
@@ -93,17 +93,31 @@ export default function LoanListScreen() {
   const toggleApplyForSelf = (val) => {
     setApplyForSelf(val);
     setSelectedUser("");
-    setLoans([]);
+    setTransactions([]);
     if (val) {
-      fetchLoans(user.id, statusFilter);
+      fetchTransactions(user.id, statusFilter);
     }
   };
 
-  const toggleExpand = (loanId) => {
-    setExpandedLoans((prev) => ({
+  const toggleExpand = (txId) => {
+    setExpandedTx((prev) => ({
       ...prev,
-      [loanId]: !prev[loanId],
+      [txId]: !prev[txId],
     }));
+  };
+
+  const handleAction = async (id, action) => {
+    try {
+      const token = await AsyncStorage.getItem("access");
+      await axios.patch(
+        `${apiUrl}/api/transactions/${id}/`,
+        { status: action }, // approved / rejected
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      fetchTransactions(targetUserId, statusFilter);
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+    }
   };
 
   return (
@@ -143,12 +157,12 @@ export default function LoanListScreen() {
           </View>
         ) : (
           <>
-            <Text style={styles.title}>Loan List</Text>
+            <Text style={styles.title}>Transaction Approvals</Text>
 
             {(user?.is_secretary || user?.is_tresurer) && (
               <>
                 <View style={styles.switchRow}>
-                  <Text style={styles.labelInline}>View my loans</Text>
+                  <Text style={styles.labelInline}>View my transactions</Text>
                   <Switch
                     value={applyForSelf}
                     onValueChange={toggleApplyForSelf}
@@ -189,53 +203,44 @@ export default function LoanListScreen() {
               >
                 <Picker.Item label="All" value="" />
                 <Picker.Item label="Pending" value="pending" />
-                <Picker.Item
-                  label="Awaiting Guarantors"
-                  value="awaiting_guarantors"
-                />
                 <Picker.Item label="Approved" value="approved" />
                 <Picker.Item label="Rejected" value="rejected" />
-                <Picker.Item label="Repaid" value="repaid" />
               </Picker>
             </View>
 
-            {/* Loans Table */}
-            {loans.length === 0 ? (
-              <Text>No loans found.</Text>
+            {/* Transactions Table */}
+            {transactions.length === 0 ? (
+              <Text>No transactions found.</Text>
             ) : (
               <View style={styles.table}>
-                {/* Table Header */}
+                {/* Header */}
                 <View style={[styles.row, styles.headerRow]}>
-                  <Text style={[styles.cell, styles.headerCell]}>Borrower</Text>
+                  <Text style={[styles.cell, styles.headerCell]}>User</Text>
+                  <Text style={[styles.cell, styles.headerCell]}>Type</Text>
                   <Text style={[styles.cell, styles.headerCell]}>Amount</Text>
-                  <Text style={[styles.cell, styles.headerCell]}>Due</Text>
+                  <Text style={[styles.cell, styles.headerCell]}>Source</Text>
                   <Text style={[styles.cell, styles.headerCell]}>Status</Text>
                   <Text style={[styles.cell, styles.headerCell]}></Text>
                 </View>
 
-                {/* Table Rows */}
-                {loans.map((loan) => (
-                  <View key={loan.id}>
+                {/* Rows */}
+                {transactions.map((tx) => (
+                  <View key={tx.id}>
                     <View style={styles.row}>
                       <Text style={styles.cell}>
-                        {loan.borrower.first_name} {loan.borrower.last_name}
+                        {tx.user.first_name} {tx.user.last_name}
                       </Text>
-                      <Text style={styles.cell}>{loan.amount}</Text>
-                      <Text style={styles.cell}>
-                        {loan.due_date
-                          ? new Date(loan.due_date).toLocaleDateString()
-                          : "-"}
-                      </Text>
-                      <Text style={styles.cell}>{loan.status}</Text>
+                      <Text style={styles.cell}>{tx.transaction_type}</Text>
+                      <Text style={styles.cell}>KES {tx.amount}</Text>
+                      <Text style={styles.cell}>{tx.source}</Text>
+                      <Text style={styles.cell}>{tx.status}</Text>
                       <TouchableOpacity
                         style={styles.cell}
-                        onPress={() => toggleExpand(loan.id)}
+                        onPress={() => toggleExpand(tx.id)}
                       >
                         <AntDesign
                           name={
-                            expandedLoans[loan.id]
-                              ? "minuscircleo"
-                              : "pluscircleo"
+                            expandedTx[tx.id] ? "minuscircleo" : "pluscircleo"
                           }
                           size={20}
                           color="#38a169"
@@ -243,28 +248,40 @@ export default function LoanListScreen() {
                       </TouchableOpacity>
                     </View>
 
-                    {/* Expanded Details */}
-                    {expandedLoans[loan.id] && (
+                    {/* Expanded */}
+                    {expandedTx[tx.id] && (
                       <View style={styles.expanded}>
-                        <Text>ID: {loan.id}</Text>
-                        <Text>
-                          Created: {new Date(loan.created_at).toLocaleString()}
-                        </Text>
-                        <Text>
-                          Guarantors:{" "}
-                          {loan.guarantor1_confirmed &&
-                          loan.guarantor2_confirmed
-                            ? "100%"
-                            : loan.guarantor1_confirmed ||
-                              loan.guarantor2_confirmed
-                            ? "50%"
-                            : "0%"}
-                        </Text>
+                        <Text>ID: {tx.id}</Text>
+                        <Text>Date: {new Date(tx.date).toLocaleString()}</Text>
+                        <Text>Balance After: KES {tx.balance_after}</Text>
+                        <Text>Notes: {tx.notes || "N/A"}</Text>
 
-                        <Text>
-                          Repayment Progress: {loan.repayment_progress || 0}%
-                        </Text>
-                        <Text>Notes: {loan.notes || "N/A"}</Text>
+                        {tx.status === "pending" && (
+                          <View style={{ flexDirection: "row", marginTop: 10 }}>
+                            <TouchableOpacity
+                              style={[styles.actionBtn, styles.approveBtn]}
+                              onPress={() => handleAction(tx.id, "approved")}
+                            >
+                              <AntDesign
+                                name="checkcircle"
+                                size={18}
+                                color="white"
+                              />
+                              <Text style={styles.btnText}>Approve</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                              style={[styles.actionBtn, styles.rejectBtn]}
+                              onPress={() => handleAction(tx.id, "rejected")}
+                            >
+                              <AntDesign
+                                name="closecircle"
+                                size={18}
+                                color="white"
+                              />
+                              <Text style={styles.btnText}>Reject</Text>
+                            </TouchableOpacity>
+                          </View>
+                        )}
                       </View>
                     )}
                   </View>

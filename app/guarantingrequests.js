@@ -6,7 +6,6 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
-  Alert,
   ImageBackground,
   ScrollView,
   StyleSheet,
@@ -14,6 +13,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Toast from "react-native-toast-message";
 
 export default function GuarantingRequests() {
   const [user, setUser] = useState(null);
@@ -27,7 +27,6 @@ export default function GuarantingRequests() {
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const token = await AsyncStorage.getItem("access");
         const storedUser = await AsyncStorage.getItem("user");
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
@@ -62,11 +61,25 @@ export default function GuarantingRequests() {
         { decision: decision, loan_id: loanId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      Alert.alert("Success", `Request ${decision}ed successfully`);
-      fetchRequests(); // refresh list
+
+      // Remove processed request immediately
+      setRequests((prev) => prev.filter((r) => r.id !== loanId));
+
+      // Show cross-platform toast instead of Alert
+      Toast.show({
+        type: decision === "accept" ? "success" : "error",
+        text1: "Success",
+        text2: `Loan request ${
+          decision === "accept" ? "approved ✅" : "rejected ❌"
+        } successfully.`,
+      });
     } catch (err) {
       console.error(err);
-      Alert.alert("Error", "Could not record decision");
+      Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: "Could not record decision.",
+      });
     }
   };
 
@@ -75,6 +88,16 @@ export default function GuarantingRequests() {
       ...prev,
       [reqId]: !prev[reqId],
     }));
+  };
+
+  const confirmLogout = async () => {
+    await AsyncStorage.clear();
+    router.replace("/login");
+    Toast.show({
+      type: "info",
+      text1: "Logged out",
+      text2: "You have been logged out successfully.",
+    });
   };
 
   return (
@@ -94,13 +117,7 @@ export default function GuarantingRequests() {
                 ).toUpperCase()}`
               : "waiting"}
           </Text>
-          <TouchableOpacity
-            style={styles.logoutButton}
-            onPress={async () => {
-              await AsyncStorage.clear();
-              router.replace("/login");
-            }}
-          >
+          <TouchableOpacity style={styles.logoutButton} onPress={confirmLogout}>
             <Text style={styles.logoutText}>Logout</Text>
           </TouchableOpacity>
         </ImageBackground>

@@ -57,7 +57,7 @@ const Dashboard = () => {
     if (!user) return null;
 
     const cards = [
-      { icon: "💰", title: "Account Balance", screen: "/AccountBalance" },
+      { icon: "💰", title: "shares Balance", screen: "/AccountBalance" },
       { icon: "💼", title: "Deposits/Shares Contribs", screen: "/deposits" },
       { icon: "📱", title: "Request for Loan", screen: "/loanrequestscreen" },
       { icon: "📄", title: "Loan Listing", screen: "/loanlistscreen" },
@@ -72,7 +72,11 @@ const Dashboard = () => {
     if (user.is_secretary) {
       cards.push(
         { icon: "✅", title: "Approve Users", screen: "/ApproveUsers" },
-        { icon: "💸🤝", title: "Loans", screen: "/loanrepaymentscreen" },
+        {
+          icon: "💸🤝",
+          title: "Loan Repayment",
+          screen: "/loanrepaymentscreen",
+        },
         {
           icon: "➕",
           title: "Capture Transactions",

@@ -1,13 +1,15 @@
+// app/deposits-shares.js
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
-import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
   ImageBackground,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,6 +19,7 @@ import {
 } from "react-native";
 
 const DepositsSharesScreen = () => {
+  const router = useRouter();
   const [transactions, setTransactions] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,43 +28,75 @@ const DepositsSharesScreen = () => {
   const [endDate, setEndDate] = useState(null);
   const [showStartPicker, setShowStartPicker] = useState(false);
   const [showEndPicker, setShowEndPicker] = useState(false);
+
   const [user, setUser] = useState(null);
-  const navigation = useNavigation();
+  const [allUsers, setAllUsers] = useState([]);
+  const [adminViewAll, setAdminViewAll] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
   const { width } = useWindowDimensions();
 
   useEffect(() => {
-    const fetchTransactions = async () => {
+    const fetchData = async () => {
       try {
         const token = await AsyncStorage.getItem("access");
         const userData = await AsyncStorage.getItem("user");
-
         if (!token) {
-          Alert.alert("Error", "Unable to fetch access token.");
+          showAlert("Error", "Unable to fetch access token.");
           return;
         }
-        setUser(JSON.parse(userData));
+
+        const parsedUser = userData ? JSON.parse(userData) : null;
+        setUser(parsedUser);
+
+        // Fetch transactions
         const { data } = await axios.get(
           `${process.env.EXPO_PUBLIC_API_URL}/api/transactions/`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
+          { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        setTransactions(data);
-        setFilteredTransactions(data);
+        const normalized = (data || [])
+          .map((d) => ({
+            ...d,
+            date: d.date,
+            amount: Number(d.amount || 0),
+            status: d.status || "pending",
+            source: d.source || "-",
+            transaction_type: d.transaction_type || "-",
+          }))
+          .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        setTransactions(normalized);
+        setFilteredTransactions(normalized);
+
+        // If admin, fetch all users for filtering
+        if (parsedUser?.is_admin) {
+          const { data: usersData } = await axios.get(
+            `${process.env.EXPO_PUBLIC_API_URL}/api/users/`,
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          setAllUsers(usersData || []);
+        }
       } catch (error) {
-        console.error("Error fetching transactions:", error);
-        Alert.alert("Error", "Something went wrong. Please try again.");
+        console.error("Error fetching transactions/users:", error);
+        showAlert("Error", "Something went wrong while fetching data.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchTransactions();
+    fetchData();
   }, []);
 
+  // Apply filters
   useEffect(() => {
     let filtered = [...transactions];
+
+    if (!adminViewAll && user) {
+      filtered = filtered.filter((item) => item.user?.id === user.id);
+    } else if (adminViewAll && selectedUser) {
+      filtered = filtered.filter((item) => item.user?.id === selectedUser);
+    }
 
     if (transactionType !== "all") {
       filtered = filtered.filter(
@@ -74,12 +109,31 @@ const DepositsSharesScreen = () => {
     }
 
     if (endDate) {
-      filtered = filtered.filter((item) => new Date(item.date) <= endDate);
+      const endOfDay = new Date(endDate);
+      endOfDay.setHours(23, 59, 59, 999);
+      filtered = filtered.filter((item) => new Date(item.date) <= endOfDay);
     }
 
     setFilteredTransactions(filtered);
-  }, [transactionType, startDate, endDate]);
+  }, [
+    transactions,
+    transactionType,
+    startDate,
+    endDate,
+    adminViewAll,
+    selectedUser,
+  ]);
 
+  // Alerts (cross-platform)
+  const showAlert = (title, message) => {
+    if (Platform.OS !== "web") {
+      Alert.alert(title, message);
+    } else if (typeof window !== "undefined" && window.alert) {
+      window.alert(`${title}\n\n${message}`);
+    }
+  };
+
+  // ✅ Expo Router logout
   const handleLogout = async () => {
     Alert.alert("Logout", "Are you sure you want to logout?", [
       { text: "Cancel", style: "cancel" },
@@ -88,9 +142,9 @@ const DepositsSharesScreen = () => {
         onPress: async () => {
           try {
             await AsyncStorage.clear();
-            router.replace("/login"); // Redirect to login screen
+            router.replace("/login");
           } catch (err) {
-            Alert.alert("Error", "Failed to logout");
+            showAlert("Error", "Failed to logout");
           }
         },
       },
@@ -99,7 +153,6 @@ const DepositsSharesScreen = () => {
 
   const renderHeader = () => (
     <View style={styles.stickyHeader}>
-      {/* Sticky Header */}
       <ImageBackground
         source={require("./assets/sacco_logo.jpeg")}
         style={styles.headerBackground}
@@ -107,7 +160,7 @@ const DepositsSharesScreen = () => {
         <Text style={styles.headerTitle}>Tomikal SHG</Text>
         <Text style={styles.accountText}>{user?.username}</Text>
         <Text style={styles.accountNumber}>
-          {user ? user.id.toUpperCase() : "waiting"}
+          {user ? String(user.id).toUpperCase() : "waiting"}
         </Text>
         <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
           <Text style={styles.logoutText}>Logout</Text>
@@ -127,6 +180,7 @@ const DepositsSharesScreen = () => {
         <Picker.Item label="All" value="all" />
         <Picker.Item label="Deposit" value="deposit" />
         <Picker.Item label="Withdrawal" value="withdrawal" />
+        <Picker.Item label="Emergency" value="emergency" />
       </Picker>
 
       <View style={styles.dateRow}>
@@ -153,9 +207,9 @@ const DepositsSharesScreen = () => {
           value={startDate || new Date()}
           mode="date"
           display="default"
-          onChange={(event, selectedDate) => {
+          onChange={(e, d) => {
             setShowStartPicker(false);
-            if (selectedDate) setStartDate(selectedDate);
+            if (d) setStartDate(d);
           }}
         />
       )}
@@ -164,33 +218,104 @@ const DepositsSharesScreen = () => {
           value={endDate || new Date()}
           mode="date"
           display="default"
-          onChange={(event, selectedDate) => {
+          onChange={(e, d) => {
             setShowEndPicker(false);
-            if (selectedDate) setEndDate(selectedDate);
+            if (d) setEndDate(d);
           }}
         />
+      )}
+
+      {user?.is_admin && (
+        <View style={{ marginTop: 20 }}>
+          <TouchableOpacity
+            style={[
+              styles.toggleButton,
+              adminViewAll ? styles.toggleOn : styles.toggleOff,
+            ]}
+            onPress={() => setAdminViewAll((prev) => !prev)}
+          >
+            <Text style={styles.toggleText}>
+              {adminViewAll ? "Viewing: All Users" : "Viewing: My Transactions"}
+            </Text>
+          </TouchableOpacity>
+
+          {adminViewAll && (
+            <>
+              <Text style={[styles.filterLabel, { marginTop: 10 }]}>
+                Select User:
+              </Text>
+              <Picker
+                selectedValue={selectedUser}
+                onValueChange={(val) => setSelectedUser(val)}
+                style={styles.picker}
+              >
+                <Picker.Item label="-- All Users --" value={null} />
+                {allUsers.map((u) => (
+                  <Picker.Item
+                    key={u.id}
+                    label={`${u.first_name || ""} ${u.last_name || ""}`}
+                    value={u.id}
+                  />
+                ))}
+              </Picker>
+            </>
+          )}
+        </View>
       )}
     </View>
   );
 
   const renderTable = () => (
-    <ScrollView horizontal>
-      <View style={styles.table}>
+    <ScrollView horizontal contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={[styles.table, { minWidth: width < 700 ? 800 : 900 }]}>
         <View style={styles.tableHeader}>
+          <Text style={[styles.tableHeaderCell, { minWidth: 180 }]}>
+            Member
+          </Text>
           <Text style={styles.tableHeaderCell}>Type</Text>
           <Text style={styles.tableHeaderCell}>Amount</Text>
-          <Text style={styles.tableHeaderCell}>Date</Text>
+          <Text style={styles.tableHeaderCell}>Source</Text>
+          <Text style={styles.tableHeaderCell}>Status</Text>
+          <Text style={[styles.tableHeaderCell, { minWidth: 200 }]}>
+            Date & Time
+          </Text>
         </View>
-        {filteredTransactions.map((item) => (
-          <View key={item.id} style={styles.tableRow}>
-            <Text style={styles.tableCell}>{item.transaction_type}</Text>
-            <Text style={styles.tableCell}>KES {item.amount}</Text>
-            <Text style={styles.tableCell}>
-              {new Date(item.date).toLocaleDateString()}{" "}
-              {new Date(item.date).toLocaleTimeString()}
+        {filteredTransactions.length === 0 ? (
+          <View style={styles.noDataRow}>
+            <Text style={styles.noDataText}>
+              No records match the selected filters.
             </Text>
           </View>
-        ))}
+        ) : (
+          filteredTransactions.map((item) => (
+            <View key={item.id} style={styles.tableRow}>
+              <Text style={[styles.tableCell, { minWidth: 180 }]}>
+                {item.user?.first_name || ""} {item.user?.last_name || ""}
+              </Text>
+              <Text style={styles.tableCell}>{item.transaction_type}</Text>
+              <Text style={styles.tableCell}>
+                KES {Number(item.amount || 0).toLocaleString()}
+              </Text>
+              <Text style={styles.tableCell}>{item.source || "-"}</Text>
+              <Text
+                style={[
+                  styles.tableCell,
+                  item.status === "approved"
+                    ? styles.statusApproved
+                    : item.status === "rejected"
+                    ? styles.statusRejected
+                    : styles.statusPending,
+                ]}
+              >
+                {String(item.status).toUpperCase()}
+              </Text>
+              <Text style={[styles.tableCell, { minWidth: 200 }]}>
+                {item.date ? new Date(item.date).toLocaleDateString() : "-"}{" "}
+                {item.date ? new Date(item.date).toLocaleTimeString() : ""}
+              </Text>
+            </View>
+          ))
+        )}
       </View>
     </ScrollView>
   );
@@ -199,9 +324,9 @@ const DepositsSharesScreen = () => {
     <View style={styles.bottomBar}>
       <TouchableOpacity
         style={styles.backButton}
-        onPress={() => navigation.goBack()}
+        onPress={() => router.push("/dashboard")}
       >
-        <Text style={styles.backButtonText}> Back to Dashboard</Text>
+        <Text style={styles.backButtonText}>Back to Dashboard</Text>
       </TouchableOpacity>
     </View>
   );
@@ -225,17 +350,10 @@ const DepositsSharesScreen = () => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  // Core container
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
 
-  // Sticky header with image background
-  stickyHeader: {
-    zIndex: 10,
-  },
+const styles = StyleSheet.create({
+  pageContainer: { flex: 1, backgroundColor: "#fff" },
+  stickyHeader: { zIndex: 10 },
   headerBackground: {
     width: "100%",
     height: 180,
@@ -243,21 +361,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "relative",
   },
-  headerTitle: {
-    color: "#fff",
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  accountText: {
-    color: "#fff",
-    fontSize: 18,
-  },
-  accountNumber: {
-    color: "#fff",
-    fontSize: 16,
-    marginTop: 5,
-  },
-
+  headerTitle: { color: "#fff", fontSize: 24, fontWeight: "bold" },
+  accountText: { color: "#fff", fontSize: 18 },
+  accountNumber: { color: "#fff", fontSize: 16, marginTop: 5 },
   logoutButton: {
     position: "absolute",
     top: 40,
@@ -266,37 +372,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#e53e3e",
     borderRadius: 5,
   },
-  logoutText: {
-    color: "#fff",
-    fontSize: 14,
-  },
-
-  // Scroll view area
-  scrollView: {
-    flex: 1,
-  },
-
-  // Filter UI
+  logoutText: { color: "#fff", fontSize: 14 },
+  content: { paddingBottom: 100 },
   filterContainer: {
     padding: 15,
     backgroundColor: "#f2f2f2",
     borderBottomColor: "#ccc",
     borderBottomWidth: 1,
   },
-  filterLabel: {
-    fontSize: 16,
-    fontWeight: "600",
-    marginBottom: 5,
-  },
-  picker: {
-    backgroundColor: "#fff",
-    borderRadius: 5,
-    marginBottom: 10,
-  },
-  dateRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
+  filterLabel: { fontSize: 16, fontWeight: "600", marginBottom: 5 },
+  picker: { backgroundColor: "#fff", borderRadius: 5, marginBottom: 10 },
+  dateRow: { flexDirection: "row", justifyContent: "space-between" },
   datePickerButton: {
     flex: 1,
     padding: 10,
@@ -305,96 +391,50 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
   },
-  datePickerText: {
-    color: "#333",
-  },
-
-  // Table area
-  table: {
-    padding: 10,
-  },
+  datePickerText: { color: "#333" },
+  toggleButton: { padding: 10, borderRadius: 5, alignItems: "center" },
+  toggleOn: { backgroundColor: "#4CAF50" },
+  toggleOff: { backgroundColor: "#ccc" },
+  toggleText: { color: "#fff", fontWeight: "600" },
+  table: { padding: 10 },
   tableHeader: {
     flexDirection: "row",
     borderBottomWidth: 2,
     borderColor: "#4CAF50",
-    paddingBottom: 5,
-    marginBottom: 5,
+    paddingBottom: 8,
+    marginBottom: 6,
+    backgroundColor: "#e8f5e9",
   },
   tableHeaderCell: {
     minWidth: 120,
-    fontWeight: "bold",
+    fontWeight: "700",
     textAlign: "left",
-    color: "#333",
+    color: "#2e7d32",
+    paddingHorizontal: 6,
   },
   tableRow: {
     flexDirection: "row",
     borderBottomWidth: 1,
     borderColor: "#eee",
-    paddingVertical: 8,
+    paddingVertical: 10,
+    backgroundColor: "#fff",
   },
   tableCell: {
     minWidth: 120,
     textAlign: "left",
     color: "#444",
+    paddingHorizontal: 6,
   },
-
-  // Cards (if used elsewhere)
-  cardContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginBottom: "auto",
-    justifyContent: "space-around",
-    paddingVertical: 20,
-  },
-  card: {
-    backgroundColor: "#f9f9f9",
-    width: "90%",
-    margin: 10,
-    padding: 20,
-    alignItems: "center",
-    borderRadius: 10,
-    elevation: 3,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#333",
-  },
-  amount: {
-    fontSize: 32,
-    color: "#4CAF50",
-  },
-
-  // Error text
-  errorText: {
-    fontSize: 18,
-    color: "red",
-    textAlign: "center",
-    marginTop: 20,
-  },
-
-  // Bottom section (footer bar)
+  noDataRow: { padding: 16, alignItems: "center" },
+  noDataText: { color: "#666" },
+  statusApproved: { color: "green", fontWeight: "700" },
+  statusRejected: { color: "red", fontWeight: "700" },
+  statusPending: { color: "orange", fontWeight: "700" },
   bottomBar: {
     padding: 15,
     backgroundColor: "#fff",
     borderTopWidth: 1,
     borderTopColor: "#ccc",
-  },
-  bottomContainer: {
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  bottomButton: {
-    marginTop: 20,
-    width: "90%",
-    padding: 15,
-    backgroundColor: "#4CAF50",
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  bottomButtonText: {
-    color: "#fff",
-    fontSize: 16,
   },
   backButton: {
     backgroundColor: "#4CAF50",
@@ -402,23 +442,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     width: "90%",
+    alignSelf: "center",
   },
-  backButtonText: {
-    color: "#fff",
-    fontSize: 16,
-  },
-
-  // Loading overlay
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  // Ensure content space before bottom button
-  content: {
-    paddingBottom: 100,
-  },
+  backButtonText: { color: "#fff", fontSize: 16 },
+  loadingContainer: { flex: 1, justifyContent: "center", alignItems: "center" },
 });
 
 export default DepositsSharesScreen;
