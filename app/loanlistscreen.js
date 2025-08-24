@@ -73,14 +73,14 @@ export default function LoanListScreen() {
     setLoading(true);
     try {
       const token = await AsyncStorage.getItem("access");
-      let url = `${apiUrl}/api/loans/?user_id=${uid}`;
+      let url = `${apiUrl}/api/loans/?=${uid}`;
       if (status) {
         url += `&status=${status}`;
       }
       const res = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setLoans(res.data);
+      setLoans(res.data.filter((l) => l.borrower.id === uid));
       setExpandedLoans({});
     } catch (err) {
       console.error(err);
@@ -218,7 +218,7 @@ export default function LoanListScreen() {
                   <View key={loan.id}>
                     <View style={styles.row}>
                       <Text style={styles.cell}>
-                        {loan.borrower_first_name} {loan.borrower_last_name}
+                        {loan.borrower.first_name} {loan.borrower.last_name}
                       </Text>
                       <Text style={styles.cell}>{loan.amount}</Text>
                       <Text style={styles.cell}>
@@ -250,7 +250,17 @@ export default function LoanListScreen() {
                         <Text>
                           Created: {new Date(loan.created_at).toLocaleString()}
                         </Text>
-                        <Text>Guarantors: {loan.guarantors?.length || 0}</Text>
+                        <Text>
+                          Guarantors:{" "}
+                          {loan.guarantor1_confirmed &&
+                          loan.guarantor2_confirmed
+                            ? "100%"
+                            : loan.guarantor1_confirmed ||
+                              loan.guarantor2_confirmed
+                            ? "50%"
+                            : "0%"}
+                        </Text>
+
                         <Text>
                           Repayment Progress: {loan.repayment_progress || 0}%
                         </Text>

@@ -119,11 +119,14 @@ class Transaction(models.Model):
 
 class LoanRequest(models.Model):
     STATUS_CHOICES = [
-        ('pending_guarantors', 'Pending Guarantor Confirmation'),
-        ('pending_treasurer', 'Pending Treasurer Approval'),
-        ('approved', 'Approved'),
-        ('rejected', 'Rejected'),
-        ('cancelled', 'Cancelled'),
+        ("pending", "Pending"),
+        ("guarantor_approval", "Guarantor Approval"),
+        ("treasurer_approval", "Treasurer Approval"),
+        ("approved", "Approved"),
+        ("rejected", "Rejected"),
+        ("disbursed", "Disbursed"),
+        ("repayment_in_progress", "Repayment In Progress"),
+        ("repaid", "Repaid"),
     ]
 
     requested_by = models.ForeignKey(
@@ -139,7 +142,13 @@ class LoanRequest(models.Model):
         help_text="The member for whom the loan is being requested."
     )
     amount = models.DecimalField(max_digits=12, decimal_places=2)
-    purpose = models.TextField()
+    amountApproved = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
+    due_date = models.DateField( null=True, blank=True,
+        help_text="The date by which the loan must be repaid."
+    )
+    total_due = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)  # NEW FIELD
+    
+    purpose = models.TextField(null=True, blank=True,)
     guarantor1 = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -150,16 +159,32 @@ class LoanRequest(models.Model):
         on_delete=models.CASCADE,
         related_name='guaranteed_loans_as_g2'
     )
-    guarantor1_confirmed = models.BooleanField(default=False)
-    guarantor2_confirmed = models.BooleanField(default=False)
-    treasurer_approved = models.BooleanField(default=False)
-    treasurer_rejected = models.BooleanField(default=False)
+    guarantor1_confirmed = models.BooleanField(null=True, default=None)
+    guarantor2_confirmed = models.BooleanField(null=True, default=None)
+    treasurer_approved = models.BooleanField(null=True, default=None)
+    treasurer_rejected = models.BooleanField(null=True, default=None)
     status = models.CharField(
         max_length=30,
         choices=STATUS_CHOICES,
         default='pending_guarantors'
     )
     created_at = models.DateTimeField(auto_now_add=True)
+    approved_at = models.DateTimeField(null=True, blank=True)
+    amount_repaid = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0.00,
+        help_text="Total amount actually approved and repaid incrementally."
+    )
+
+    def check_repayment_status(self):
+        """Mark loan repaid if fully covered."""
+        if self.amount_repaid >= self.total_due:
+            self.status = "repaid"
+            self.save()
+        return self.status
+    
+
     def clean(self):
         errors = {}
 
@@ -197,21 +222,102 @@ class LoanRequest(models.Model):
             self.status = 'rejected'
         self.save()
 
+    def update_repayment_status(self):
+        """Update loan status based on repayments made."""
+        if self.amount_repaid == 0:
+            return  # leave as is until repayment starts
+
+        if self.amount_repaid < self.total_due:
+            self.status = "repayment_in_progress"
+        elif self.amount_repaid >= self.total_due:
+            self.status = "repaid"
+
+        self.save(update_fields=["status"])
+
     def __str__(self):
         return f"Loan #{self.id} for {self.borrower} - {self.amount}"
 
 
+# ==================================================# Loan Repayment Models==================================================
 class LoanRepayment(models.Model):
+    STATUS_CHOICES = [
+        ("pending", "Pending"),
+        ("approved", "Approved"),
+        ("rejected", "Rejected"),
+    ]
+
     loan = models.ForeignKey(
-        LoanRequest,
+        "LoanRequest",
         on_delete=models.CASCADE,
-        related_name='repayments'
+        related_name="repayments"
     )
-    amount_paid = models.DecimalField(max_digits=12, decimal_places=2)
-    payment_date = models.DateTimeField(auto_now_add=True)
+    amount_paid = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal("0.01"))]
+    )
+    payment_date = models.DateTimeField(default=timezone.now)
+    installment_number = models.PositiveIntegerField(
+        null=True, blank=True,
+        help_text="Installment sequence number"
+    )
+    method = models.CharField(
+        max_length=30,
+        choices=[
+            ("cash", "Cash"),
+            ("bank_transfer", "Bank Transfer"),
+            ("mpesa", "M-Pesa"),
+        ],
+        default="cash"
+    )
+    balance_after_payment = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0.00,
+        help_text="Remaining balance after this payment"
+    )
+    penalty = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0.00,
+        help_text="Late payment penalty"
+    )
+    notes = models.TextField(null=True, blank=True)
+
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default="pending"
+    )
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="repayments_created",
+        null=True, blank=True,
+    )
+    approved_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name="repayments_approved"
+    )
+    approved_at = models.DateTimeField(null=True, blank=True)
+    
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        # update loan status after repayment
+        self.loan.update_repayment_status()
+
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
+        # re-check after deletion
+        self.loan.update_repayment_status()
+
+    
 
     def __str__(self):
-        return f"Repayment {self.amount_paid} for Loan #{self.loan.id}"
+        return f"Loan #{self.loan.id} Repayment {self.amount_paid} ({self.status})"
 
 
 class LoanGuarantorAction(models.Model):

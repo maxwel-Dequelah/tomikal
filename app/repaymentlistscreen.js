@@ -1,4 +1,3 @@
-// GuarantingRequests.js
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -15,66 +14,73 @@ import {
   View,
 } from "react-native";
 
-export default function GuarantingRequests() {
+export default function RepaymentListScreen() {
   const [user, setUser] = useState(null);
-  const [requests, setRequests] = useState([]);
+  const [repayments, setRepayments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [expandedRequests, setExpandedRequests] = useState({});
+  const [expandedRepayments, setExpandedRepayments] = useState({});
   const orgName = process.env.EXPO_PUBLIC_ORG_NAME || "waiting...";
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const router = useRouter();
 
   useEffect(() => {
-    const fetchInitialData = async () => {
+    const fetchRepayments = async () => {
       try {
         const token = await AsyncStorage.getItem("access");
         const storedUser = await AsyncStorage.getItem("user");
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
-        await fetchRequests();
+
+        if (!parsedUser?.is_tresurer) {
+          Alert.alert("Error", "Only Treasurer can view this page.");
+          router.replace("/dashboard");
+          return;
+        }
+
+        const res = await axios.get(`${apiUrl}/api/repayments/`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        setRepayments(res.data.filter((r) => !r.approved));
       } catch (err) {
-        console.error(err);
+        console.error(err.response?.data || err.message);
+        setRepayments([]);
       } finally {
         setLoading(false);
       }
     };
-    fetchInitialData();
+    fetchRepayments();
   }, []);
 
-  const fetchRequests = async () => {
-    try {
-      const token = await AsyncStorage.getItem("access");
-      const res = await axios.get(`${apiUrl}/api/guarantor/requests/`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setRequests(res.data);
-    } catch (err) {
-      console.error(err);
-      setRequests([]);
-    }
-  };
-
-  const handleDecision = async (loanId, decision) => {
-    try {
-      const token = await AsyncStorage.getItem("access");
-      await axios.put(
-        `${apiUrl}/api/guarantor/decision/`,
-        { decision: decision, loan_id: loanId },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      Alert.alert("Success", `Request ${decision}ed successfully`);
-      fetchRequests(); // refresh list
-    } catch (err) {
-      console.error(err);
-      Alert.alert("Error", "Could not record decision");
-    }
-  };
-
-  const toggleExpand = (reqId) => {
-    setExpandedRequests((prev) => ({
+  const toggleExpand = (repaymentId) => {
+    setExpandedRepayments((prev) => ({
       ...prev,
-      [reqId]: !prev[reqId],
+      [repaymentId]: !prev[repaymentId],
     }));
+  };
+
+  const handleAction = async (repaymentId, action) => {
+    try {
+      const token = await AsyncStorage.getItem("access");
+
+      const res = await axios.patch(
+        `${apiUrl}/api/repayments/${repaymentId}/approve/`,
+        { action },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (res.status === 200) {
+        Alert.alert("Success", res.data.message || "Repayment updated.");
+        setRepayments(
+          (prev) => prev.filter((r) => r.id !== repaymentId) // remove after update
+        );
+      }
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+      Alert.alert("Error", err.response?.data?.error || "Something went wrong");
+    }
   };
 
   return (
@@ -114,42 +120,39 @@ export default function GuarantingRequests() {
           </View>
         ) : (
           <>
-            <Text style={styles.title}>Guarantor Requests</Text>
+            <Text style={styles.title}>Pending Repayments</Text>
 
-            {requests.length === 0 ? (
-              <Text>No pending guarantor requests.</Text>
+            {repayments.length === 0 ? (
+              <Text>No repayments awaiting approval.</Text>
             ) : (
               <View style={styles.table}>
-                {/* Table Header */}
+                {/* Header Row */}
                 <View style={[styles.row, styles.headerRow]}>
                   <Text style={[styles.cell, styles.headerCell]}>Borrower</Text>
-                  <Text style={[styles.cell, styles.headerCell]}>Amount</Text>
-                  <Text style={[styles.cell, styles.headerCell]}>Due</Text>
-                  <Text style={[styles.cell, styles.headerCell]}>Status</Text>
+                  <Text style={[styles.cell, styles.headerCell]}>Loan ID</Text>
+                  <Text style={[styles.cell, styles.headerCell]}>
+                    Amount Paid
+                  </Text>
                   <Text style={[styles.cell, styles.headerCell]}></Text>
                 </View>
 
-                {/* Table Rows */}
-                {requests.map((req) => (
-                  <View key={req.id}>
+                {/* Repayment Rows */}
+                {repayments.map((repayment) => (
+                  <View key={repayment.id}>
                     <View style={styles.row}>
                       <Text style={styles.cell}>
-                        {req.borrower.first_name} {req.borrower.last_name}
+                        {repayment.loan.borrower.first_name}{" "}
+                        {repayment.loan.borrower.last_name}
                       </Text>
-                      <Text style={styles.cell}>{req.amount}</Text>
-                      <Text style={styles.cell}>
-                        {req.due_date
-                          ? new Date(req.due_date).toLocaleDateString()
-                          : "-"}
-                      </Text>
-                      <Text style={styles.cell}>{req.status}</Text>
+                      <Text style={styles.cell}>{repayment.loan.id}</Text>
+                      <Text style={styles.cell}>{repayment.amount_paid}</Text>
                       <TouchableOpacity
                         style={styles.cell}
-                        onPress={() => toggleExpand(req.id)}
+                        onPress={() => toggleExpand(repayment.id)}
                       >
                         <AntDesign
                           name={
-                            expandedRequests[req.id]
+                            expandedRepayments[repayment.id]
                               ? "minuscircleo"
                               : "pluscircleo"
                           }
@@ -160,30 +163,37 @@ export default function GuarantingRequests() {
                     </View>
 
                     {/* Expanded Details */}
-                    {expandedRequests[req.id] && (
+                    {expandedRepayments[repayment.id] && (
                       <View style={styles.expanded}>
-                        <Text>ID: {req.id}</Text>
+                        <Text>ID: {repayment.id}</Text>
+                        <Text>Method: {repayment.method}</Text>
                         <Text>
-                          Requested on:{" "}
-                          {new Date(req.created_at).toLocaleString()}
+                          Payment Date:{" "}
+                          {new Date(
+                            repayment.payment_date
+                          ).toLocaleDateString()}
                         </Text>
-                        <Text>Notes: {req.notes || "N/A"}</Text>
+                        <Text>Notes: {repayment.notes || "N/A"}</Text>
+
+                        {/* Approve / Reject */}
                         <View style={styles.actionRow}>
                           <TouchableOpacity
                             style={[
-                              styles.actionButton,
+                              styles.actionBtn,
                               { backgroundColor: "green" },
                             ]}
-                            onPress={() => handleDecision(req.id, "accept")}
+                            onPress={() =>
+                              handleAction(repayment.id, "approve")
+                            }
                           >
                             <Text style={styles.actionText}>Approve</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
                             style={[
-                              styles.actionButton,
+                              styles.actionBtn,
                               { backgroundColor: "red" },
                             ]}
-                            onPress={() => handleDecision(req.id, "reject")}
+                            onPress={() => handleAction(repayment.id, "reject")}
                           >
                             <Text style={styles.actionText}>Reject</Text>
                           </TouchableOpacity>
@@ -198,7 +208,6 @@ export default function GuarantingRequests() {
         )}
       </ScrollView>
 
-      {/* Back Button */}
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => router.push("/dashboard")}
@@ -267,14 +276,13 @@ const styles = StyleSheet.create({
   },
   actionRow: {
     flexDirection: "row",
-    marginTop: 10,
     justifyContent: "space-around",
+    marginTop: 10,
   },
-  actionButton: {
-    flex: 1,
-    marginHorizontal: 5,
+  actionBtn: {
     padding: 10,
     borderRadius: 6,
+    minWidth: 100,
     alignItems: "center",
   },
   actionText: { color: "#fff", fontWeight: "bold" },

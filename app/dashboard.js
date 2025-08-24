@@ -61,7 +61,7 @@ const Dashboard = () => {
       { icon: "💼", title: "Deposits/Shares Contribs", screen: "/deposits" },
       { icon: "📱", title: "Request for Loan", screen: "/loanrequestscreen" },
       { icon: "📄", title: "Loan Listing", screen: "/loanlistscreen" },
-      { icon: "💸", title: "Loans", screen: "/LoansScreen" },
+
       {
         icon: "🤝",
         title: "Guaranting Requests",
@@ -72,7 +72,7 @@ const Dashboard = () => {
     if (user.is_secretary) {
       cards.push(
         { icon: "✅", title: "Approve Users", screen: "/ApproveUsers" },
-
+        { icon: "💸🤝", title: "Loans", screen: "/loanrepaymentscreen" },
         {
           icon: "➕",
           title: "Capture Transactions",
@@ -84,9 +84,14 @@ const Dashboard = () => {
     if (user.is_tresurer) {
       cards.push(
         {
+          icon: "📄",
+          title: "Loan Repayment Aproval",
+          screen: "/repaymentlistscreen",
+        },
+        {
           icon: "✔️",
           title: "Approve Loans",
-          screen: "/TransactionApproval",
+          screen: "/loanAprovalScreen",
         },
         {
           icon: "✔️",

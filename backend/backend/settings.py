@@ -28,6 +28,13 @@ DEBUG = True
 ALLOWED_HOSTS = ["*",'http://localhost:19006',"http://localhost:19006/","http://localhost:8081","http://localhost:8080"]
 
 
+
+
+
+
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,10 +46,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "rest_framework",  # Corrected the app name
     "sacco",  # Your app name
+    'corsheaders',  # Add this line to include CORS headers
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True  # Allow all origins for CORS
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",  # must be at the top, before CommonMiddleware
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

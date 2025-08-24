@@ -1,8 +1,11 @@
+import datetime
+from decimal import Decimal
 from rest_framework import serializers
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.contrib.auth import authenticate
-from ..models import User, Transaction, Balance, EmergencyFund, LoanRequest, PasswordResetOTP, LoanGuarantorAction
+from django.db import models
+from ..models import LoanRepayment, User, Transaction, Balance, EmergencyFund, LoanRequest, PasswordResetOTP, LoanGuarantorAction
 
 
 # User Serializer
@@ -161,15 +164,18 @@ class LoanGuarantorSerializer(serializers.ModelSerializer):
 
 class LoanSerializer(serializers.ModelSerializer):
     """Main Loan serializer for listing and retrieving loans"""
-    requested_by = serializers.StringRelatedField()
-    borrower = serializers.StringRelatedField()
+    requested_by = UserSerializer(read_only=True)
+    borrower = UserSerializer(read_only=True)
 
 
 
     class Meta:
         model = LoanRequest
         fields = "__all__"
-      
+    def to_representation(self, instance):
+        # auto-refresh repayment status before showing
+        instance.update_repayment_status()
+        return super().to_representation(instance)  
 
 
 class LoanCreateSerializer(serializers.ModelSerializer):
@@ -196,32 +202,179 @@ class LoanCreateSerializer(serializers.ModelSerializer):
         validated_data["requested_by"] = request_user
         return LoanRequest.objects.create(**validated_data)
     
+    def to_representation(self, instance):
+        # auto-refresh repayment status before showing
+        instance.update_repayment_status()
+        return super().to_representation(instance)
 
-class LoanApprovalSerializer(serializers.Serializer):
-    """Serializer for treasurer to approve or reject a loan"""
-    action = serializers.ChoiceField(choices=["approve", "reject"])
+# serializers.py
+from rest_framework import serializers
+from django.conf import settings
+from datetime import date, timedelta
+
+class LoanApprovalSerializer(serializers.ModelSerializer):
+    approved_amount = serializers.DecimalField(
+        max_digits=12, decimal_places=2, required=False
+    )
+    total_due = serializers.DecimalField(
+        max_digits=12, decimal_places=2, required=False
+    )
+
+    class Meta:
+        model = LoanRequest
+        fields = ["approved_amount", "total_due", "due_date", "status"]
+
+    def validate(self, attrs):
+        loan = self.instance
+        approved_amount = attrs.get("approved_amount", loan.amount)
+
+        # must not exceed requested
+        if approved_amount > loan.amount:
+            raise serializers.ValidationError(
+                {"approved_amount": "Approved amount cannot exceed requested amount."}
+            )
+        return attrs
 
     def update(self, instance, validated_data):
-        action = validated_data["action"]
+        approved_amount = validated_data.get("approved_amount", instance.amount)
+        total_due = validated_data.get("total_due")
 
-        if action == "approve":
-            instance.status = "approved"
-        elif action == "reject":
-            instance.status = "rejected"
+        # set amountApproved
+        instance.amountApproved = approved_amount
+
+        # set due_date = today + 12 months
+        instance.due_date = date.today() + timedelta(days=365)
+
+        # compute total_due if not provided
+        if not total_due:
+            interest_rate = getattr(settings, "LOAN_INTEREST_RATE", 0.1)  # e.g., 10%
+            total_due = approved_amount * Decimal(1 + interest_rate/100)  # Simple interest calculation
+
+        instance.total_due = total_due
+
+        # mark approved
+        instance.status = "approved"
+        instance.treasurer_approved = True
+        instance.approved_at = datetime.datetime.now()
 
         instance.save()
         return instance
 
+# ===================================== Loan Repayment Serializer =========================================
+# ===================================== Loan Repayment Serializer =========================================
+class LoanRepaymentSerializer(serializers.ModelSerializer):
+    loan = LoanSerializer(read_only=True)  # nested object (for response only)
+    loan_id = serializers.PrimaryKeyRelatedField(
+        queryset=LoanRequest.objects.all(),
+        source="loan",
+        write_only=True
+    )
+    created_by = UserSerializer(read_only=True)
+    approved_by = UserSerializer(read_only=True)
+    approved = serializers.BooleanField(read_only=True)
 
+    class Meta:
+        model = LoanRepayment
+        fields = [
+            "id",
+            "loan", "loan_id",          # accept loan_id in request, return loan in response
+            "amount_paid",              # must be in request
+            "method",                   # must be in request
+            "payment_date",             # auto (set in model default or overridden in view)
+            "installment_number",       # auto/computed, not required
+            "balance_after_payment",    # auto
+            "penalty",                  # auto
+            "notes",                    # optional
+            "created_by",
+            "approved_by",
+            "approved",
+        ]
+        read_only_fields = [
+            "loan", "payment_date", "installment_number",
+            "balance_after_payment", "penalty",
+            "created_by", "approved_by", "approved"
+        ]
+    def to_representation(self, instance):
+        # auto-refresh repayment status before showing
+        instance.update_repayment_status()
+        return super().to_representation(instance)
+
+    def create(self, validated_data):
+        user = self.context["request"].user
+        if not getattr(user, "is_secretary", False):
+            raise serializers.ValidationError(
+                {"error": "Only secretary can record a repayment."}
+            )
+
+        loan = validated_data.pop("loan")
+        if loan.status != "approved":
+            raise serializers.ValidationError(
+                {"error": "Cannot record repayment for unapproved loan."}
+            )
+
+        repayment = LoanRepayment.objects.create(
+            loan=loan,
+            created_by=user,
+            status="pending",   # pending approval
+            **validated_data
+        )
+        return repayment
+
+
+
+
+class LoanRepaymentApprovalSerializer(serializers.ModelSerializer):
+    """Treasurer approves or rejects repayment"""
+    action = serializers.ChoiceField(choices=["approve", "reject"])
+
+    class Meta:
+        model = LoanRepayment
+        fields = ["action"]
+    def check_loan_fully_repaid(self, loan):
+        if loan.amount_repaid >= loan.total_due:
+            loan.status = "repaid"
+            loan.save()
+    def update(self, instance, validated_data):
+        user = self.context["request"].user
+        if not user.is_tresurer:
+            raise serializers.ValidationError(
+                {"error": "Only treasurer can approve/reject repayments."}
+            )
+
+        action = validated_data["action"]
+
+        if action == "approve":
+            if instance.status == "approved":
+                raise serializers.ValidationError(
+                    {"error": "Repayment already approved."}
+                )
+
+            # update loan balance
+            loan = instance.loan
+            loan.amount_repaid += instance.amount_paid
+            loan.save()
+
+            # update repayment record
+            instance.status = "approved"
+            instance.approved_by = user
+            instance.balance_after_payment = (
+                loan.total_due - loan.amount_repaid
+            )
+            instance.save()
+
+        elif action == "reject":
+            instance.delete()
+            return None
+
+        return instance
 
 
 
 # LOAN GUARANTOR SERIALIZER ACTIONS
 
 class GuarantorRequestSerializer(serializers.ModelSerializer):
-    borrower = serializers.CharField(source="borrower.username", read_only=True)
-    requested_by = serializers.CharField(source="requested_by.username", read_only=True)
-
+    borrower = UserSerializer(read_only=True)
+    requested_by = UserSerializer(read_only=True)
     class Meta:
         model = LoanRequest
         fields = [
@@ -234,47 +387,29 @@ class GuarantorRequestSerializer(serializers.ModelSerializer):
             "created_at",
         ]
 
-
+# serializers.py
 class GuarantorDecisionSerializer(serializers.ModelSerializer):
-    decision = serializers.ChoiceField(choices=[("accept", "Accept"), ("reject", "Reject")])
+    decision = serializers.SerializerMethodField()
 
     class Meta:
         model = LoanGuarantorAction
-        fields = ["decision"]
+        fields = ["id", "loan", "guarantor", "decision"]
 
-    def save(self, **kwargs):
-        loan = self.instance.loan
-        guarantor = self.instance.guarantor
-        decision = self.validated_data["decision"]
+    def get_decision(self, obj):
+        if obj.confirmed is True:
+            return "accept"
+        elif obj.confirmed is False:
+            return "reject"
+        return "pending"  # None = pending
 
-        confirmed = decision == "accept"
-        self.instance.confirmed = confirmed
-        self.instance.save()
-
-        # loan.update_status() will be triggered in LoanGuarantorAction.save()
-
-        return self.instance
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def update(self, instance, validated_data):
+        decision = self.context["request"].data.get("decision")
+        if decision == "accept":
+            instance.confirmed = True
+        elif decision == "reject":
+            instance.confirmed = False
+        instance.save()
+        return instance
 
 
 # ==================================== Password Reset Serializers ===============================================

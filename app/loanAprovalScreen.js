@@ -1,4 +1,4 @@
-// GuarantingRequests.js
+// LoanApprovalScreen.js
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -15,66 +15,61 @@ import {
   View,
 } from "react-native";
 
-export default function GuarantingRequests() {
+export default function LoanApprovalScreen() {
   const [user, setUser] = useState(null);
-  const [requests, setRequests] = useState([]);
+  const [loans, setLoans] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [expandedRequests, setExpandedRequests] = useState({});
+  const [expandedLoans, setExpandedLoans] = useState({});
   const orgName = process.env.EXPO_PUBLIC_ORG_NAME || "waiting...";
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const router = useRouter();
 
   useEffect(() => {
-    const fetchInitialData = async () => {
+    const fetchLoans = async () => {
       try {
         const token = await AsyncStorage.getItem("access");
         const storedUser = await AsyncStorage.getItem("user");
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
-        await fetchRequests();
+
+        const res = await axios.get(
+          `${apiUrl}/api/loans/?status=pending_treasurer`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setLoans(res.data.filter((l) => l.status === "pending_treasurer"));
       } catch (err) {
         console.error(err);
+        setLoans([]);
       } finally {
         setLoading(false);
       }
     };
-    fetchInitialData();
+    fetchLoans();
   }, []);
 
-  const fetchRequests = async () => {
-    try {
-      const token = await AsyncStorage.getItem("access");
-      const res = await axios.get(`${apiUrl}/api/guarantor/requests/`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setRequests(res.data);
-    } catch (err) {
-      console.error(err);
-      setRequests([]);
-    }
+  const toggleExpand = (loanId) => {
+    setExpandedLoans((prev) => ({
+      ...prev,
+      [loanId]: !prev[loanId],
+    }));
   };
 
-  const handleDecision = async (loanId, decision) => {
+  const approveLoan = async (loanId) => {
     try {
       const token = await AsyncStorage.getItem("access");
       await axios.put(
-        `${apiUrl}/api/guarantor/decision/`,
-        { decision: decision, loan_id: loanId },
+        `${apiUrl}/api/loans/${loanId}/approve/`,
+        {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      Alert.alert("Success", `Request ${decision}ed successfully`);
-      fetchRequests(); // refresh list
+      Alert.alert("Success", "Loan approved successfully!");
+      setLoans((prev) => prev.filter((loan) => loan.id !== loanId));
     } catch (err) {
       console.error(err);
-      Alert.alert("Error", "Could not record decision");
+      Alert.alert("Error", "Failed to approve loan.");
     }
-  };
-
-  const toggleExpand = (reqId) => {
-    setExpandedRequests((prev) => ({
-      ...prev,
-      [reqId]: !prev[reqId],
-    }));
   };
 
   return (
@@ -110,14 +105,14 @@ export default function GuarantingRequests() {
         {loading ? (
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color="#38a169" />
-            <Text>Loading...</Text>
+            <Text>Loading pending approvals...</Text>
           </View>
         ) : (
           <>
-            <Text style={styles.title}>Guarantor Requests</Text>
+            <Text style={styles.title}>Pending Loan Approvals</Text>
 
-            {requests.length === 0 ? (
-              <Text>No pending guarantor requests.</Text>
+            {loans.length === 0 ? (
+              <Text>No pending loans found.</Text>
             ) : (
               <View style={styles.table}>
                 {/* Table Header */}
@@ -125,31 +120,29 @@ export default function GuarantingRequests() {
                   <Text style={[styles.cell, styles.headerCell]}>Borrower</Text>
                   <Text style={[styles.cell, styles.headerCell]}>Amount</Text>
                   <Text style={[styles.cell, styles.headerCell]}>Due</Text>
-                  <Text style={[styles.cell, styles.headerCell]}>Status</Text>
                   <Text style={[styles.cell, styles.headerCell]}></Text>
                 </View>
 
                 {/* Table Rows */}
-                {requests.map((req) => (
-                  <View key={req.id}>
+                {loans.map((loan) => (
+                  <View key={loan.id}>
                     <View style={styles.row}>
                       <Text style={styles.cell}>
-                        {req.borrower.first_name} {req.borrower.last_name}
+                        {loan.borrower.first_name} {loan.borrower.last_name}
                       </Text>
-                      <Text style={styles.cell}>{req.amount}</Text>
+                      <Text style={styles.cell}>{loan.amount}</Text>
                       <Text style={styles.cell}>
-                        {req.due_date
-                          ? new Date(req.due_date).toLocaleDateString()
+                        {loan.due_date
+                          ? new Date(loan.due_date).toLocaleDateString()
                           : "-"}
                       </Text>
-                      <Text style={styles.cell}>{req.status}</Text>
                       <TouchableOpacity
                         style={styles.cell}
-                        onPress={() => toggleExpand(req.id)}
+                        onPress={() => toggleExpand(loan.id)}
                       >
                         <AntDesign
                           name={
-                            expandedRequests[req.id]
+                            expandedLoans[loan.id]
                               ? "minuscircleo"
                               : "pluscircleo"
                           }
@@ -160,34 +153,21 @@ export default function GuarantingRequests() {
                     </View>
 
                     {/* Expanded Details */}
-                    {expandedRequests[req.id] && (
+                    {expandedLoans[loan.id] && (
                       <View style={styles.expanded}>
-                        <Text>ID: {req.id}</Text>
+                        <Text>ID: {loan.id}</Text>
                         <Text>
-                          Requested on:{" "}
-                          {new Date(req.created_at).toLocaleString()}
+                          Created: {new Date(loan.created_at).toLocaleString()}
                         </Text>
-                        <Text>Notes: {req.notes || "N/A"}</Text>
-                        <View style={styles.actionRow}>
-                          <TouchableOpacity
-                            style={[
-                              styles.actionButton,
-                              { backgroundColor: "green" },
-                            ]}
-                            onPress={() => handleDecision(req.id, "accept")}
-                          >
-                            <Text style={styles.actionText}>Approve</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity
-                            style={[
-                              styles.actionButton,
-                              { backgroundColor: "red" },
-                            ]}
-                            onPress={() => handleDecision(req.id, "reject")}
-                          >
-                            <Text style={styles.actionText}>Reject</Text>
-                          </TouchableOpacity>
-                        </View>
+                        <Text>Purpose: {loan.purpose || "N/A"}</Text>
+                        <Text>Status: {loan.status}</Text>
+
+                        <TouchableOpacity
+                          style={styles.approveButton}
+                          onPress={() => approveLoan(loan.id)}
+                        >
+                          <Text style={styles.approveButtonText}>Approve</Text>
+                        </TouchableOpacity>
                       </View>
                     )}
                   </View>
@@ -198,7 +178,6 @@ export default function GuarantingRequests() {
         )}
       </ScrollView>
 
-      {/* Back Button */}
       <TouchableOpacity
         style={styles.backButton}
         onPress={() => router.push("/dashboard")}
@@ -265,19 +244,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#ddd",
   },
-  actionRow: {
-    flexDirection: "row",
+  approveButton: {
     marginTop: 10,
-    justifyContent: "space-around",
-  },
-  actionButton: {
-    flex: 1,
-    marginHorizontal: 5,
+    backgroundColor: "#38a169",
     padding: 10,
-    borderRadius: 6,
+    borderRadius: 8,
     alignItems: "center",
   },
-  actionText: { color: "#fff", fontWeight: "bold" },
+  approveButtonText: { color: "#fff", fontSize: 14, fontWeight: "bold" },
   backButton: {
     position: "absolute",
     bottom: 40,

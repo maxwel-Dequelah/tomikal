@@ -6,6 +6,7 @@ import { useRouter } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   ImageBackground,
   ScrollView,
   StyleSheet,
@@ -31,6 +32,8 @@ export default function LoanRequestScreen() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [formDisabled, setFormDisabled] = useState(false);
+
+  const [submitting, setSubmitting] = useState(false); // shows submitting state
 
   const router = useRouter();
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
@@ -90,7 +93,7 @@ export default function LoanRequestScreen() {
         setFormDisabled(true);
       } else if (eligibleAmount <= 0) {
         setEligibilityError(
-          "Borrower has a pending or unpaid loan and cannot request another."
+          "Borrower has a pending or unpaid loan, or a pending Loan request and cannot request another."
         );
         setFormDisabled(true);
       }
@@ -152,9 +155,9 @@ export default function LoanRequestScreen() {
     const borrowerNumericId = borrowerId ? Number(borrowerId) : null;
     return users.filter(
       (u) =>
-        !u.is_secretary &&
-        !u.is_tresurer &&
-        (borrowerNumericId === null || u.id !== borrowerNumericId)
+        // !u.is_secretary &&
+        // !u.is_tresurer &&
+        borrowerNumericId === null || u.id !== borrowerNumericId
     );
   }, [users, borrowerId]);
 
@@ -181,6 +184,7 @@ export default function LoanRequestScreen() {
     if (guarantorError) return;
     if (!borrowerId) return;
 
+    setSubmitting(true);
     try {
       const token = await AsyncStorage.getItem("access");
       const payload = {
@@ -190,14 +194,62 @@ export default function LoanRequestScreen() {
         guarantor2_id: guarantor2,
       };
 
-      await axios.post(`${apiUrl}/api/loans/request/`, payload, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.post(
+        `${apiUrl}/api/loans/request/?user_id=${borrowerId}`,
+        payload,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
-      router.push("/dashboard");
+      // show success alert, then navigate
+      // Use Alert.alert on native & fallback to window.confirm/alert for web
+      if (typeof window !== "undefined" && window.document) {
+        // web
+        window.alert("Loan request submitted successfully.");
+        router.push("/dashboard");
+      } else {
+        Alert.alert("Success", "Loan request submitted successfully.", [
+          { text: "OK", onPress: () => router.push("/dashboard") },
+        ]);
+      }
     } catch (err) {
       console.error(err);
+      if (typeof window !== "undefined" && window.document) {
+        window.alert("Failed to submit loan request. Please try again.");
+      } else {
+        Alert.alert(
+          "Error",
+          "Failed to submit loan request. Please try again later."
+        );
+      }
+    } finally {
+      setSubmitting(false);
     }
+  };
+
+  const confirmLogout = async () => {
+    // Use Alert.alert for native; fallback to window.confirm for web
+    if (typeof window !== "undefined" && window.document) {
+      const ok = window.confirm("Are you sure you want to logout?");
+      if (ok) {
+        await AsyncStorage.clear();
+        router.replace("/login");
+      }
+      return;
+    }
+
+    Alert.alert("Confirm Logout", "Are you sure you want to logout?", [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Logout",
+        style: "destructive",
+        onPress: async () => {
+          await AsyncStorage.clear();
+          router.replace("/login");
+        },
+      },
+    ]);
   };
 
   const canShowForm =
@@ -222,13 +274,7 @@ export default function LoanRequestScreen() {
                 ).toUpperCase()}`
               : "waiting"}
           </Text>
-          <TouchableOpacity
-            style={styles.logoutButton}
-            onPress={async () => {
-              await AsyncStorage.clear();
-              router.replace("/login");
-            }}
-          >
+          <TouchableOpacity style={styles.logoutButton} onPress={confirmLogout}>
             <Text style={styles.logoutText}>Logout</Text>
           </TouchableOpacity>
         </ImageBackground>
@@ -304,7 +350,7 @@ export default function LoanRequestScreen() {
                   value={String(amount)}
                   onChangeText={setAmount}
                   keyboardType="numeric"
-                  editable={!formDisabled}
+                  editable={!formDisabled && !submitting}
                 />
                 {isAmountInvalid && (
                   <Text style={{ color: "red" }}>
@@ -317,7 +363,7 @@ export default function LoanRequestScreen() {
                   <Picker
                     selectedValue={guarantor1}
                     onValueChange={(val) => handleGuarantorChange(1, val)}
-                    enabled={!formDisabled}
+                    enabled={!formDisabled && !submitting}
                   >
                     <Picker.Item label="-- Select Guarantor 1 --" value="" />
                     {filteredGuarantors.map((u) => (
@@ -335,7 +381,7 @@ export default function LoanRequestScreen() {
                   <Picker
                     selectedValue={guarantor2}
                     onValueChange={(val) => handleGuarantorChange(2, val)}
-                    enabled={!formDisabled}
+                    enabled={!formDisabled && !submitting}
                   >
                     <Picker.Item label="-- Select Guarantor 2 --" value="" />
                     {filteredGuarantors.map((u) => (
@@ -355,16 +401,26 @@ export default function LoanRequestScreen() {
                 <TouchableOpacity
                   style={[
                     styles.button,
-                    (isFormIncomplete || guarantorError || formDisabled) && {
+                    (isFormIncomplete ||
+                      guarantorError ||
+                      formDisabled ||
+                      submitting) && {
                       backgroundColor: "gray",
                     },
                   ]}
                   disabled={
-                    isFormIncomplete || !!guarantorError || formDisabled
+                    isFormIncomplete ||
+                    !!guarantorError ||
+                    formDisabled ||
+                    submitting
                   }
                   onPress={handleSubmit}
                 >
-                  <Text style={styles.buttonText}>Submit Loan Request</Text>
+                  {submitting ? (
+                    <ActivityIndicator color="#fff" />
+                  ) : (
+                    <Text style={styles.buttonText}>Submit Loan Request</Text>
+                  )}
                 </TouchableOpacity>
               </>
             )}

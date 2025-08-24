@@ -84,7 +84,7 @@ class UpdateProfileView(generics.UpdateAPIView):
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
 
 # users approve view
@@ -183,16 +183,20 @@ class LoanCreateView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        # If secretary is creating on behalf of someone else, 'user' is passed in request data
-        target_user_id = self.request.data.get("user")
+        # Get user_id from query params
+        target_user_id = self.request.query_params.get("user_id")
+
         if target_user_id:
-            # Treasurer can also use this endpoint if needed
+            # If user_id is provided, fetch that user
             target_user = get_object_or_404(User, id=target_user_id)
         else:
-            # Default to logged in user
+            # Otherwise, default to the logged-in user
             target_user = self.request.user
 
-        serializer.save(borrower=target_user, requested_by=self.request.user,)
+        serializer.save(
+            borrower=target_user,
+            requested_by=self.request.user,
+        )
 
 
 class LoanListView(generics.ListAPIView):
@@ -208,7 +212,7 @@ class LoanListView(generics.ListAPIView):
         user = self.request.user
         if getattr(user, "is_treasurer", False) or getattr(user, "is_secretary", False):
             return LoanRequest.objects.all().order_by("-created_at")
-        return LoanRequest.objects.filter(user=user).order_by("-created_at")
+        return LoanRequest.objects.filter(borrower=user).order_by("-created_at")
 
 
 class LoanAdminListView(generics.ListAPIView):
@@ -230,6 +234,7 @@ class LoanAdminListView(generics.ListAPIView):
 
 
 class LoanApprovalView(generics.UpdateAPIView):
+    
     """
     Treasurer approves or rejects a loan request.
     """
@@ -237,16 +242,17 @@ class LoanApprovalView(generics.UpdateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return LoanRequest.objects.filter(status="Pending")
+        return LoanRequest.objects.filter(status="pending_treasurer")
 
     def update(self, request, *args, **kwargs):
         loan = self.get_object()
-
-        if request.user.role != "Treasurer":
+        user = request.user
+        if getattr(user, "is_treasurer", False):
             return Response(
                 {"error": "Only the Treasurer can approve or reject loans."},
                 status=status.HTTP_403_FORBIDDEN
             )
+        
 
         serializer = self.get_serializer(loan, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
@@ -270,6 +276,7 @@ class LoanEligibilityView(APIView):
                     status=status.HTTP_404_NOT_FOUND
                 )
         else:
+            print("Using logged-in user as target.  ")
             target_user = request.user
 
         try:
@@ -280,7 +287,7 @@ class LoanEligibilityView(APIView):
             # 🔹 Check for pending or unpaid loans
             existing_loan = LoanRequest.objects.filter(
                 borrower=target_user
-            ).exclude(status="paid").first()
+            ).exclude(status="repaid").first()
 
             if existing_loan:
                 return Response({
@@ -288,7 +295,7 @@ class LoanEligibilityView(APIView):
                     "balance": balance.balance,
                     "multiplier": multiplier,
                     "eligible_amount": 0,  # Force 0 if loan exists
-                    "pending_loan_amount": existing_loan.amount,
+                    "pending_loan_amount": existing_loan.total_due-existing_loan.amount_repaid,
                     "pending_loan_status": existing_loan.status
                 })
 
@@ -304,6 +311,68 @@ class LoanEligibilityView(APIView):
                 {"error": "Balance record not found for the specified user."},
                 status=status.HTTP_404_NOT_FOUND
             )
+# ============================================Loan Repayment =========================================================
+# ============================================ Loan Repayment =========================================================
+from ..models import LoanRepayment
+from .serializers import LoanRepaymentSerializer, LoanRepaymentApprovalSerializer
+
+class LoanRepaymentCreateView(generics.CreateAPIView):
+    """
+    Secretary records a repayment (pending approval).
+    """
+    queryset = LoanRepayment.objects.all()
+    serializer_class = LoanRepaymentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        if not getattr(user, "is_secretary", False):
+            raise PermissionDenied("Only the Secretary can record loan repayments.")
+        serializer.save()
+
+
+class LoanRepaymentListView(generics.ListAPIView):
+    """
+    - Treasurer & Secretary: see all repayments
+    - Borrower: see only their repayments
+    """
+    serializer_class = LoanRepaymentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        if getattr(user, "is_tresurer", False) or getattr(user, "is_secretary", False):
+            return LoanRepayment.objects.all().order_by("-payment_date")
+        return LoanRepayment.objects.filter(loan__borrower=user).order_by("-payment_date")
+
+
+class LoanRepaymentApprovalView(generics.UpdateAPIView):
+    """
+    Treasurer approves/rejects repayments.
+    """
+    queryset = LoanRepayment.objects.all()
+    serializer_class = LoanRepaymentApprovalSerializer
+    permission_classes = [IsAuthenticated]
+
+    def update(self, request, *args, **kwargs):
+        repayment = self.get_object()
+        user = request.user
+
+        if not getattr(user, "is_tresurer", False):
+            return Response(
+                {"error": "Only Treasurer can approve or reject repayments."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        serializer = self.get_serializer(repayment, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        updated = serializer.save()
+        
+
+        if updated is None:
+            return Response({"message": "Repayment rejected and removed."}, status=status.HTTP_200_OK)
+        
+        return Response(LoanRepaymentSerializer(updated).data, status=status.HTTP_200_OK)
 
 
 # LOAN GUARANTOR ACTIONS
@@ -317,38 +386,45 @@ class PendingGuarantorRequestsView(generics.ListAPIView):
         return LoanRequest.objects.filter(
             status="pending_guarantors"
         ).filter(
-            Q(guarantor1=user, guarantor1_confirmed=False)
-            | Q(guarantor2=user, guarantor2_confirmed=False)
+            Q(guarantor1=user, guarantor1_confirmed= None ) |
+            Q(guarantor2=user, guarantor2_confirmed=None)
         )
 
 
-class GuarantorDecisionView(APIView):
+class GuarantorDecisionView(generics.UpdateAPIView):
+    queryset = LoanGuarantorAction.objects.all()
+    serializer_class = GuarantorDecisionSerializer
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, loan_id):
+    def update(self, request, *args, **kwargs):
+        # We identify the guarantor action to update
+        loan_id = request.data.get("loan_id")
+        decision = request.data.get("decision")  # now expect "accept" or "reject"
         user = request.user
 
-        try:
-            loan = LoanRequest.objects.get(id=loan_id, status="pending_guarantors")
-        except LoanRequest.DoesNotExist:
-            return Response({"error": "Loan not found or not awaiting guarantors."}, status=status.HTTP_404_NOT_FOUND)
+        if decision not in ["accept", "reject"]:
+            return Response(
+                {"error": "Decision must be 'accept' or 'reject'"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
-        # Ensure the user is actually a guarantor
-        if user not in [loan.guarantor1, loan.guarantor2]:
-            return Response({"error": "You are not a guarantor for this loan."}, status=status.HTTP_403_FORBIDDEN)
+        loan = get_object_or_404(LoanRequest, id=loan_id)
 
-        # Find or create guarantor action record
-        action, _ = LoanGuarantorAction.objects.get_or_create(
+        # Get or create the guarantor action
+        action, created = LoanGuarantorAction.objects.get_or_create(
             loan=loan,
             guarantor=user,
+            defaults={"confirmed": None},  # start as pending
         )
 
-        serializer = GuarantorDecisionSerializer(instance=action, data=request.data)
+        # Pass the existing action to serializer for update
+        serializer = self.get_serializer(
+            action, data={"decision": decision}, partial=True
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        return Response({"message": "Decision recorded successfully."})
-
+        return Response(serializer.data)
 
 
 

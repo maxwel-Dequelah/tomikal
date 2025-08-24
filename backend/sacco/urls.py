@@ -12,8 +12,16 @@ from .api.views import (
     LoanCreateView,            # Import LoanCreateView to fix the error
     LoanEligibilityView,       # Import LoanEligibilityView to fix the error
     LoanAdminListView,         # Import LoanAdminListView to fix the error
-    PendingGuarantorRequestsView
+    PendingGuarantorRequestsView,
+
+    
+    LoanRepaymentCreateView,
+    LoanRepaymentListView,
+    LoanRepaymentApprovalView,
 )
+
+
+
 
 urlpatterns = [
     # Authentication
@@ -47,8 +55,11 @@ urlpatterns = [
     path("guarantor/requests/", PendingGuarantorRequestsView.as_view(), name="guarantor-pending"),
 
     # Endpoint for guarantors to accept/reject a loan request
-    path("guarantor/decision/<int:loan_id>/", GuarantorDecisionView.as_view(), name="guarantor-decision"),
+    path("guarantor/decision/", GuarantorDecisionView.as_view(), name="guarantor-decision"),
 
+    path("repayments/", LoanRepaymentListView.as_view(), name="repayment-list"),
+    path("repayments/create/", LoanRepaymentCreateView.as_view(), name="repayment-create"),
+    path("repayments/<int:pk>/approve/", LoanRepaymentApprovalView.as_view(), name="repayment-approve"),
 
 
 
