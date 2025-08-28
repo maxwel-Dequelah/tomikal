@@ -111,6 +111,12 @@ class Transaction(models.Model):
         self.balance_after = self.user.balance.balance
         self.status = 'approved'
         self.save()
+    
+    def reject(self):
+        if self.status != 'pending':
+            raise ValidationError("Only pending transactions can be rejected.")
+        self.status = 'rejected'
+        self.save()
 
 
 

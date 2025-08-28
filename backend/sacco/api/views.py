@@ -12,7 +12,7 @@ from django.db.models import Q
 
 from ..models import LoanGuarantorAction, User, Transaction, Balance, LoanRequest, EmergencyFund
 from .serializers import (
-    GuarantorRequestSerializer, LoanApprovalSerializer, RegisterSerializer, LoginSerializer, UserSerializer, UpdateProfileSerializer,
+    GuarantorRequestSerializer, LoanApprovalSerializer, RegisterSerializer, LoginSerializer, TransactionStatusUpdateSerializer, UserSerializer, UpdateProfileSerializer,
     TransactionSerializer, BalanceSerializer,
     EmergencyFundSerializer,
     UserApprovalSerializer,
@@ -101,14 +101,21 @@ class ApproveOrRejectUserView(generics.UpdateAPIView):
 
 # Transaction List View (Admin or User)
 class TransactionListView(generics.ListAPIView):
+
     serializer_class = TransactionSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+
+        params=self.request.query_params.get('status',None)
+        if params and self.request.user.is_tresurer:  # your model has is_admin flag too
+            return Transaction.objects.filter(status=params).order_by('-date')
         user = self.request.user
-        if user.is_tresurer:  # your model has is_admin flag too
-            return Transaction.objects.all().order_by('-date')
+        # if user.is_tresurer:  # your model has is_admin flag too
+        #     return Transaction.objects.all().order_by('-date').filter(status='pending')
         return Transaction.objects.filter(user=user).order_by('-date')
+
+
 
 # Transaction Create View
 class TransactionCreateView(generics.CreateAPIView):
@@ -120,41 +127,50 @@ class TransactionCreateView(generics.CreateAPIView):
         serializer.save(user=user, status='pending')  # Save with pending status only
 
 
-
-
+# ✅ View is now thin and delegates everything
 class TransactionUpdateView(generics.UpdateAPIView):
     queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer
+    serializer_class = TransactionStatusUpdateSerializer
     permission_classes = [IsAdminUser]
 
     def update(self, request, *args, **kwargs):
-        transaction = self.get_object()
+        return super().update(request, *args, **kwargs)
 
-        if transaction.status == 'approved':
-            return Response({"error": "Transaction already approved."}, status=status.HTTP_400_BAD_REQUEST)
 
-        try:
-            balance_record = Balance.objects.get(user=transaction.user)
-        except Balance.DoesNotExist:
-            raise ValidationError("Balance record not found.")
+# class TransactionUpdateView(generics.UpdateAPIView):
+#     queryset = Transaction.objects.all()
+#     # serializer_class = TransactionSerializer
+#     serializer_class = TransactionStatusUpdateSerializer
+#     permission_classes = [IsAdminUser]
 
-        if transaction.transaction_type == 'withdrawal':
-            if balance_record.balance < transaction.amount:
-                raise ValidationError("Insufficient balance.")
-            balance_record.adjust_balance(-transaction.amount)
+#     def update(self, request, *args, **kwargs):
+#         transaction = self.get_object()
 
-        elif transaction.transaction_type == 'deposit':
-            balance_record.adjust_balance(transaction.amount)
+#         if transaction.status == 'approved':
+#             return Response({"error": "Transaction already approved."}, status=status.HTTP_400_BAD_REQUEST)
 
-        elif transaction.transaction_type == 'emergency':
-            fund, _ = EmergencyFund.objects.get_or_create(id=1, defaults={"balance": 0.00})
-            fund.adjust_balance(transaction.amount)
+#         try:
+#             balance_record = Balance.objects.get(user=transaction.user)
+#         except Balance.DoesNotExist:
+#             raise ValidationError("Balance record not found.")
 
-        transaction.status = 'approved'
-        transaction.balance_after = balance_record.balance
-        transaction.save()
+#         if transaction.transaction_type == 'withdrawal':
+#             if balance_record.balance < transaction.amount:
+#                 raise ValidationError("Insufficient balance.")
+#             balance_record.adjust_balance(-transaction.amount)
 
-        return Response({"success": "Transaction approved successfully."}, status=status.HTTP_200_OK)
+#         elif transaction.transaction_type == 'deposit':
+#             balance_record.adjust_balance(transaction.amount)
+
+#         elif transaction.transaction_type == 'emergency':
+#             fund, _ = EmergencyFund.objects.get_or_create(id=1, defaults={"balance": 0.00})
+#             fund.adjust_balance(transaction.amount)
+
+#         transaction.status = 'approved'
+#         transaction.balance_after = balance_record.balance
+#         transaction.save()
+
+#         return Response({"success": "Transaction approved successfully."}, status=status.HTTP_200_OK)
 
 # Current User's Transactions Only
 class UserTransactionListView(generics.ListAPIView):

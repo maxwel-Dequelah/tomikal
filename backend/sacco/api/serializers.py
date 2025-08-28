@@ -122,17 +122,39 @@ class PendingUserSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 # 🔄 NEW Serializer to Approve Transaction and Update Balance
+# class TransactionStatusUpdateSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Transaction
+#         fields = ['action']
+
+#     def update(self, instance, validated_data):
+#         new_status = validated_data.get('action')
+#         if new_status == 'approve' and instance.status != 'pending':
+#             instance.approve()
+#         elif new_status == 'reject' and instance.status == 'pending':
+#             instance.status = 'rejected'
+#             instance.save()
+#         else:
+#             raise serializers.ValidationError("Only transition to 'approved' is supported.")
+#         return instance
+# ✅ Serializer cleanly handles action
 class TransactionStatusUpdateSerializer(serializers.ModelSerializer):
+    action = serializers.ChoiceField(choices=['approve', 'reject'],write_only=True)
+
     class Meta:
         model = Transaction
-        fields = ['action']
+        fields = ['action',"status"]
 
     def update(self, instance, validated_data):
-        new_status = validated_data.get('action')
-        if new_status == 'approved' and instance.status != 'approved':
+        action = validated_data['action']
+
+        if action == 'approve':
             instance.approve()
+        elif action == 'reject':
+            instance.reject()
         else:
-            raise serializers.ValidationError("Only transition to 'approved' is supported.")
+            raise serializers.ValidationError("Invalid action.")
+
         return instance
 
 

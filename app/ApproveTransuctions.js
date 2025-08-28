@@ -46,11 +46,14 @@ const PendingTransactionsScreen = () => {
   const fetchPendingTransactions = async (authToken) => {
     try {
       setLoading(true);
-      const response = await axios.get(`${apiUrl}/api/transactions/`, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
+      const response = await axios.get(
+        `${apiUrl}/api/transactions/?status=pending`,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
       const pending = response.data.filter(
         (t) => t.status.toLowerCase() === "pending"
       );
