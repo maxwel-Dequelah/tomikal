@@ -1,0 +1,1028 @@
+[
+  {
+    "model": "contenttypes.contenttype",
+    "fields": {
+      "app_label": "admin",
+      "model": "logentry"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "27ue24g2muzu2pz30h6ipulmbw5wmj95",
+    "fields": {
+      "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1uJrPi:esFDSB7usyFgYl-JBZQGpw0GF_uNNqU5qUNaKCVXbd8",
+      "expire_date": "2025-06-10T10:20:06.955Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "4k3jv4xvlecd5rambuqo2w5mzmcau6t1",
+    "fields": {
+      "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1t0jyh:YLpcSZ5_4KoQeX0-a768w0_3U-GxzS8c2BrVB4XNUlc",
+      "expire_date": "2024-10-29T16:00:55.212Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "7nq0k6vyah2jguq28zrzjruyep192wp5",
+    "fields": {
+      "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1upXAE:G0Z_3hGaOSgvPfm8oXyutjdbsB-8qX1HpXr_B_HZB0o",
+      "expire_date": "2025-09-05T19:11:02.551Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "9wd82ngo8h6po1o4auqxcruh44t35szy",
+    "fields": {
+      "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1sx6DQ:h7ILQF9EpCfnjsC6ff9q4R6nOQVMDWhN8SvNqBRCFJ8",
+      "expire_date": "2024-10-19T14:57:04.422Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "jotl4tbswzpoxt2fhl4exk937rebwxuf",
+    "fields": {
+      "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1ukjRn:CYu-vToNEfAbCYx_BSAAd_jFibAdjc4Ynai8sOKfMFk",
+      "expire_date": "2025-08-23T13:17:19.516Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "k9f9yzfqg8p6h5gc60wu7komih2abvl5",
+    "fields": {
+      "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1uNdF2:jElg4U60IVBCTw4MMmpLwiLBDuqn86WyHUkjGphP9rw",
+      "expire_date": "2025-06-20T20:00:40.423Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "nucx46xpg6tp4pc11crlidrj764d7y8i",
+    "fields": {
+      "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1uIXWd:mfLuZrOQSqPLRpLGczofRQBFppaRYuqk2dr91Y5rF-k",
+      "expire_date": "2025-06-06T18:53:47.333Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "r5j9vtss7w67x8nfza105f153wqyri6c",
+    "fields": {
+      "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1uKa5X:962gtqqdwenSMe04bcUmko-Km091kiOJz-vxtC7PEP8",
+      "expire_date": "2025-06-12T10:02:15.801Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "w9n5tofzezawupfnd73fc9d659bkz3ov",
+    "fields": {
+      "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1swgCM:NCp7-Ck7Yx5SIbY6W5SiV-SWr9kdRjCjD1nNlUUhCxI",
+      "expire_date": "2024-10-18T11:10:14.010Z"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "fields": {
+      "name": "Can add log entry",
+      "content_type": [
+        "admin",
+        "logentry"
+      ],
+      "codename": "add_logentry"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+      "action_time": "2024-10-04T11:32:05.314Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "balance"
+      ],
+      "object_id": "1",
+      "object_repr": " -  - Balance: -0.03",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+      "action_time": "2024-10-04T11:32:33.547Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "balance"
+      ],
+      "object_id": "1",
+      "object_repr": " -  - Balance: 7200",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+      "action_time": "2024-10-04T12:10:59.419Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "balance"
+      ],
+      "object_id": "1",
+      "object_repr": " -  - Balance: 200",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+      "action_time": "2024-10-04T12:13:41.917Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "0ae9f7f8-4467-492c-99c7-3beb2cb04eab",
+      "object_repr": "- - 10.00 on 2024-10-04 15:13:29+03:00 (deposit)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+      "action_time": "2024-10-15T16:20:56.580Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "4e4c047f-cb51-4a0e-a896-e9769f7371eb",
+      "object_repr": "Maxwel-0703536959 - 200 on 2024-10-15 19:15:26+03:00 (deposit)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+      "action_time": "2024-10-15T16:22:25.618Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "66fe1a0e-4fa2-40f7-83c2-15accbc47f8b",
+      "object_repr": "Maxwel-0703536959 - 200 on 2024-10-15 19:22:12+03:00 (deposit)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+      "action_time": "2025-05-23T19:38:50.092Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "fff393a5-33cb-466a-98af-0c46ab8f267a",
+      "object_repr": "Maxwel-0703536959 - 50 on 2025-05-23 22:38:20+03:00 (withdrawal)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+      "action_time": "2025-05-23T19:46:59.164Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "balance"
+      ],
+      "object_id": "4",
+      "object_repr": "Tom - 0792927652 - Balance: 0.00",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+      "action_time": "2025-05-23T19:48:06.396Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "9JIYEoe1T7Op",
+      "object_repr": "Tom - 0792927652",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+      "action_time": "2025-05-23T23:31:25.228Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "0ae9f7f8-4467-492c-99c7-3beb2cb04eab",
+      "object_repr": "admin - deposit - 10.00 (approved)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Status\", \"Created by\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+      "action_time": "2025-05-23T23:32:48.943Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "d4mDtPwYQxaa",
+      "object_repr": "MAXWEL - admin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"PhoneNumber\", \"Is approved\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+      "action_time": "2025-05-23T23:35:10.884Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "zfAJsaMASSye",
+      "object_repr": "Maxwel - 0703536959",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is approved\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+      "action_time": "2025-05-23T23:44:01.210Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+      "object_repr": "admin - emergency - 100 (pending)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+      "action_time": "2025-05-23T23:44:21.373Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+      "object_repr": "admin - emergency - 100.00 (approved)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+      "action_time": "2025-05-23T23:46:52.415Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "emergencyfund"
+      ],
+      "object_id": "2",
+      "object_repr": "admin Emergency Fund: 0.0",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+      "action_time": "2025-05-23T23:47:11.410Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "emergencyfund"
+      ],
+      "object_id": "3",
+      "object_repr": "0703536959 Emergency Fund: 0.0",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+      "action_time": "2025-05-23T23:47:34.079Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "emergencyfund"
+      ],
+      "object_id": "4",
+      "object_repr": "0792927652 Emergency Fund: 0.0",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+      "action_time": "2025-05-23T23:47:48.975Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "emergencyfund"
+      ],
+      "object_id": "5",
+      "object_repr": "0757240481 Emergency Fund: 0.0",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+      "action_time": "2025-05-23T23:49:01.550Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+      "object_repr": "admin - emergency - 100.00 (approved)",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+      "action_time": "2025-05-23T23:49:24.359Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+      "object_repr": "admin - emergency - 100.00 (pending)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+      "action_time": "2025-05-23T23:49:53.838Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+      "object_repr": "admin - emergency - 100.00 (approved)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+      "action_time": "2025-05-23T23:50:53.324Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "dead0dfe-aa89-48c9-9a71-de18cb801b42",
+      "object_repr": "admin - emergency - 100 (pending)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+      "action_time": "2025-05-24T00:25:22.332Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "zfAJsaMASSye",
+      "object_repr": "Maxwel - 0703536959",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is secretary\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+      "action_time": "2025-05-24T00:26:31.621Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "d4mDtPwYQxaa",
+      "object_repr": "MAXWEL - admin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is secretary\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+      "action_time": "2025-05-27T10:24:03.568Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "s_NbE25SSz-k",
+      "object_repr": "Gordon - 0000000000",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is active\", \"Is approved\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+      "action_time": "2025-05-27T12:16:41.304Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "s_NbE25SSz-k",
+      "object_repr": "Gordon - 0000000000",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is tresurer\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+      "action_time": "2025-05-29T10:02:54.414Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "PmQ-D0VYSJKv",
+      "object_repr": "Stephen - 721507065",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is active\", \"Is approved\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+      "action_time": "2025-05-29T10:03:21.206Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "PmQ-D0VYSJKv",
+      "object_repr": "Stephen - 721507065",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+      "action_time": "2025-05-29T10:05:43.033Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "VI8x0OciRwyH",
+      "object_repr": "Stephen - 0721507065",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is active\", \"Is approved\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 30,
+    "fields": {
+      "action_time": "2025-05-29T10:07:23.131Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "de45708c-fdd8-40dd-958b-d31a534dc788",
+      "object_repr": "0721507065 - deposit - 200 (approved)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 31,
+    "fields": {
+      "action_time": "2025-05-29T10:08:03.431Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "balance"
+      ],
+      "object_id": "8",
+      "object_repr": "Stephen - 0721507065 - Balance: 200",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+      "action_time": "2025-06-02T16:06:14.515Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "1d364b08-8947-40e0-8651-5b3c8748c315",
+      "object_repr": "0000000000 - deposit - 300 (approved)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+      "action_time": "2025-06-02T16:07:26.451Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "balance"
+      ],
+      "object_id": "6",
+      "object_repr": "Gordon - 0000000000 - Balance: 300",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+      "action_time": "2025-06-06T12:40:10.231Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "zfAJsaMASSye",
+      "object_repr": "Maxwel - 0703536959",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is admin\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+      "action_time": "2025-06-06T12:57:02.416Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "V8BUwpcEQq60",
+      "object_repr": "Tom - 0792927652",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+      "action_time": "2025-06-06T12:59:55.662Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "d4mDtPwYQxaa",
+      "object_repr": "MAXWEL - admin",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+      "action_time": "2025-06-06T13:06:15.973Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "SBNNV9dUSKKB",
+      "object_repr": "Alvin - 0792927652",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is active\", \"Is approved\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+      "action_time": "2025-06-07T08:21:36.539Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "zfAJsaMASSye",
+      "object_repr": "Maxwel - 0703536959",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Staff status\", \"Is secretary\", \"Is tresurer\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 39,
+    "fields": {
+      "action_time": "2025-06-07T09:16:24.042Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "zfAJsaMASSye",
+      "object_repr": "Maxwel - 0703536959",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 40,
+    "fields": {
+      "action_time": "2025-08-09T13:17:58.858Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "d4mDtPwYQxaa",
+      "object_repr": "MAXWEL - admin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is admin\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 41,
+    "fields": {
+      "action_time": "2025-08-09T13:41:06.424Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "zfAJsaMASSye",
+      "object_repr": "Maxwel - 0703536959",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is secretary\", \"Is tresurer\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 42,
+    "fields": {
+      "action_time": "2025-08-09T13:49:31.991Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "zfAJsaMASSye",
+      "object_repr": "Maxwel - 0703536959",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is tresurer\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 43,
+    "fields": {
+      "action_time": "2025-08-11T06:51:43.239Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "emergencyfund"
+      ],
+      "object_id": "8",
+      "object_repr": "Emergency Fund Balance: 0.00",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 44,
+    "fields": {
+      "action_time": "2025-08-11T06:51:43.239Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "emergencyfund"
+      ],
+      "object_id": "7",
+      "object_repr": "Emergency Fund Balance: 0.00",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 45,
+    "fields": {
+      "action_time": "2025-08-11T06:51:43.240Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "emergencyfund"
+      ],
+      "object_id": "5",
+      "object_repr": "Emergency Fund Balance: 0.00",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 46,
+    "fields": {
+      "action_time": "2025-08-11T06:51:43.240Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "emergencyfund"
+      ],
+      "object_id": "3",
+      "object_repr": "Emergency Fund Balance: 0.00",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 47,
+    "fields": {
+      "action_time": "2025-08-11T06:51:43.240Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "emergencyfund"
+      ],
+      "object_id": "2",
+      "object_repr": "Emergency Fund Balance: 0.00",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 48,
+    "fields": {
+      "action_time": "2025-08-11T14:07:53.055Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "user"
+      ],
+      "object_id": "d4mDtPwYQxaa",
+      "object_repr": "MAXWEL - admin",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Is tresurer\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 49,
+    "fields": {
+      "action_time": "2025-08-21T09:20:13.880Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "transaction"
+      ],
+      "object_id": "cef341b5-0958-44ba-8432-a8ae9a1ca897",
+      "object_repr": "0731090360 - deposit - 5000 (approved)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 50,
+    "fields": {
+      "action_time": "2025-08-21T09:20:29.368Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "balance"
+      ],
+      "object_id": "10",
+      "object_repr": "Roseline - 0731090360 - Balance: 5000.00",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 51,
+    "fields": {
+      "action_time": "2025-08-22T08:39:47.105Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "loanrequest"
+      ],
+      "object_id": "8",
+      "object_repr": "Loan #8 for Roseline - 0731090360 - 200.00",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 52,
+    "fields": {
+      "action_time": "2025-08-22T13:49:38.644Z",
+      "user": [
+        "admin"
+      ],
+      "content_type": [
+        "sacco",
+        "loanrequest"
+      ],
+      "object_id": "9",
+      "object_repr": "Loan #9 for Roseline - 0731090360 - 1000.00",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  }
+]

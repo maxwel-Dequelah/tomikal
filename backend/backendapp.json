@@ -1,0 +1,1590 @@
+[
+  {
+    "model": "sacco.emergencyfund",
+    "pk": 1,
+    "fields": {
+      "balance": "800.00"
+    }
+  },
+  {
+    "model": "sacco.user",
+    "fields": {
+      "password": "pbkdf2_sha256$870000$tSdQAEIkcyib1ovJrmEzHZ$KP1UcClEikCAjdeklCmlerZBuqLb8PWJM8vAwbEVwoU=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "0792927652",
+      "is_staff": false,
+      "date_joined": "2025-06-06T13:01:46Z",
+      "dob": "2003-06-27",
+      "first_name": "Alvin",
+      "last_name": "Okal",
+      "phoneNumber": "0792927652",
+      "email": "",
+      "is_active": true,
+      "is_admin": false,
+      "is_secretary": false,
+      "is_tresurer": false,
+      "is_approved": true,
+      "date_Approved": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "sacco.balance",
+    "pk": 1,
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "balance": "30320.00",
+      "lastEdited": "2025-08-24T07:49:57.042Z"
+    }
+  },
+  {
+    "model": "sacco.balance",
+    "pk": 2,
+    "fields": {
+      "user": [
+        "0703536959"
+      ],
+      "balance": "2770.00",
+      "lastEdited": "2025-08-24T07:49:58.138Z"
+    }
+  },
+  {
+    "model": "sacco.balance",
+    "pk": 3,
+    "fields": {
+      "user": [
+        "0757240481"
+      ],
+      "balance": "0.00",
+      "lastEdited": "2024-10-04T21:47:55.794Z"
+    }
+  },
+  {
+    "model": "sacco.balance",
+    "pk": 6,
+    "fields": {
+      "user": [
+        "0000000000"
+      ],
+      "balance": "300.00",
+      "lastEdited": "2025-06-02T16:07:26.450Z"
+    }
+  },
+  {
+    "model": "sacco.balance",
+    "pk": 8,
+    "fields": {
+      "user": [
+        "0721507065"
+      ],
+      "balance": "200.00",
+      "lastEdited": "2025-05-29T10:08:03.429Z"
+    }
+  },
+  {
+    "model": "sacco.balance",
+    "pk": 9,
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "balance": "1330.00",
+      "lastEdited": "2025-08-24T07:49:59.678Z"
+    }
+  },
+  {
+    "model": "sacco.balance",
+    "pk": 10,
+    "fields": {
+      "user": [
+        "0731090360"
+      ],
+      "balance": "5000.00",
+      "lastEdited": "2025-08-21T09:20:29.367Z"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "05b48031-1d5e-49d7-ad02-36444c09a43a",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T20:53:26.390Z",
+      "amount": "1000.00",
+      "transaction_type": "withdrawal",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "32320.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "079e741d-e95a-40a8-b855-35e4452f72da",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T21:09:34.651Z",
+      "amount": "1000.00",
+      "transaction_type": "withdrawal",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "31320.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "0ae9f7f8-4467-492c-99c7-3beb2cb04eab",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2024-10-04T12:13:29Z",
+      "amount": "10.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "0.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "0d23b73c-6be1-4698-8693-6605ce08dd08",
+    "fields": {
+      "user": [
+        "0703536959"
+      ],
+      "date": "2025-06-06T12:51:23.629Z",
+      "amount": "200.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "0703536959"
+      ],
+      "balance_after": "2370.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "1622ca07-d763-4a0e-b3a5-f014ab297a0c",
+    "fields": {
+      "user": [
+        "0703536959"
+      ],
+      "date": "2025-08-12T11:34:03.567Z",
+      "amount": "970.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "2220.00",
+      "source": "Cash"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "16cb0ef6-cb5a-4eb4-91f2-96fc9b70a132",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T20:28:52.596Z",
+      "amount": "2560.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "30760.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "1d364b08-8947-40e0-8651-5b3c8748c315",
+    "fields": {
+      "user": [
+        "0000000000"
+      ],
+      "date": "2025-06-02T16:05:41Z",
+      "amount": "300.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "300.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "1ef37616-69b2-4f8a-b4af-8789f67edf04",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-08-12T11:23:42.174Z",
+      "amount": "8000.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "17530.00",
+      "source": "Cash"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "20082e32-ce04-467a-a6f8-eafec30ddb4c",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-07T06:02:42.484Z",
+      "amount": "120.00",
+      "transaction_type": "withdrawal",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "2470.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "227df7ab-8f55-49ba-b16a-e664db947476",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T21:15:38.451Z",
+      "amount": "810.00",
+      "transaction_type": "withdrawal",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "17380.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-05-23T23:42:47Z",
+      "amount": "100.00",
+      "transaction_type": "emergency",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "0.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "2b1bab44-ec09-416a-89e8-2148ff38ad9f",
+    "fields": {
+      "user": [
+        "0703536959"
+      ],
+      "date": "2025-08-11T05:54:36.586Z",
+      "amount": "100.00",
+      "transaction_type": "emergency",
+      "status": "approved",
+      "created_by": [
+        "0703536959"
+      ],
+      "balance_after": "1250.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "2fa6de69-6c26-4d1d-b1c1-b776eb3192a5",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-07T11:15:49.378Z",
+      "amount": "2800.00",
+      "transaction_type": "withdrawal",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "70.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "329d9003-37f2-45f3-ba52-2ee9433ca7aa",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-06T19:13:06.203Z",
+      "amount": "1000.00",
+      "transaction_type": "withdrawal",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "810.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "3303afe3-de4e-4034-b499-5a62b09f3662",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T20:38:37.374Z",
+      "amount": "2560.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "33320.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "33968dff-9788-4587-87f6-961a0ee2b2a2",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T21:10:50.827Z",
+      "amount": "1000.00",
+      "transaction_type": "withdrawal",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "30320.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "33cb17ca-3d95-4684-bb09-27c584cb1625",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-06T22:02:11.592Z",
+      "amount": "520.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "1330.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "3db075c6-3bc9-4fad-9cbe-c23db2ec92c9",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-07T10:46:03.584Z",
+      "amount": "2870.00",
+      "transaction_type": "withdrawal",
+      "status": "rejected",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "0.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "3fad0610-dbb3-40eb-acfe-d956c99763ec",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T15:07:25.220Z",
+      "amount": "500.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "21580.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "4e4c047f-cb51-4a0e-a896-e9769f7371eb",
+    "fields": {
+      "user": [
+        "0703536959"
+      ],
+      "date": "2024-10-15T16:15:26Z",
+      "amount": "200.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": null,
+      "balance_after": "2770.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "56361a83-761c-44eb-a954-a0915c2195ef",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-08-11T06:49:19.162Z",
+      "amount": "500.00",
+      "transaction_type": "emergency",
+      "status": "approved",
+      "created_by": [
+        "0703536959"
+      ],
+      "balance_after": "9530.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "5b05b099-f7d4-4007-a784-05b7e4a28c3a",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T15:08:23.579Z",
+      "amount": "500.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "22080.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "5b7201f2-383e-41e1-a021-7f67394f3dee",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-07T06:01:57.067Z",
+      "amount": "120.00",
+      "transaction_type": "withdrawal",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "2350.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "602aab4f-bfbe-4619-ae31-ae446b00ea50",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-07T10:46:16.089Z",
+      "amount": "2870.00",
+      "transaction_type": "withdrawal",
+      "status": "rejected",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "0.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "624f917d-9ee0-4399-aa5d-a9c3e4b1b4bb",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-08-12T11:26:53.951Z",
+      "amount": "100.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "17630.00",
+      "source": "Cash"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "66fe1a0e-4fa2-40f7-83c2-15accbc47f8b",
+    "fields": {
+      "user": [
+        "0703536959"
+      ],
+      "date": "2024-10-15T16:22:12Z",
+      "amount": "200.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": null,
+      "balance_after": "2570.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "67a4f4eb-e439-478f-a8c6-15b377424cd5",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T13:13:26.470Z",
+      "amount": "200.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "20580.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "71d63821-3974-42ae-a96d-56148469e156",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T20:02:49.031Z",
+      "amount": "2560.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "25640.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "76ea4ea4-9043-4499-8e20-db9246c95772",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T20:26:01.762Z",
+      "amount": "2560.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "28200.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "7957d1a3-7277-45fa-bf94-a5001ca0362c",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T21:02:43.104Z",
+      "amount": "1000.00",
+      "transaction_type": "withdrawal",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "15380.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "810aef95-609e-4cfb-b7a7-649a8ffa7806",
+    "fields": {
+      "user": [
+        "0703536959"
+      ],
+      "date": "2025-08-11T06:46:05.342Z",
+      "amount": "200.00",
+      "transaction_type": "emergency",
+      "status": "approved",
+      "created_by": [
+        "0703536959"
+      ],
+      "balance_after": "1250.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "a0521e50-8c60-4527-a053-221966077258",
+    "fields": {
+      "user": [
+        "0703536959"
+      ],
+      "date": "2025-08-11T06:10:01.509Z",
+      "amount": "100.00",
+      "transaction_type": "emergency",
+      "status": "approved",
+      "created_by": [
+        "0703536959"
+      ],
+      "balance_after": "1250.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "a7d84fb5-f3fb-4b62-8a53-c51ebc97f3cf",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-06T15:42:15.550Z",
+      "amount": "500.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "1070.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "b31c5083-9ead-4bba-a8e2-8e3d4d418bef",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-06T15:42:57.240Z",
+      "amount": "740.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "1810.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "b3b5cffc-9b28-4de3-ba2e-75dd9d219c49",
+    "fields": {
+      "user": [
+        "0703536959"
+      ],
+      "date": "2025-08-09T13:48:37.881Z",
+      "amount": "800.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "0703536959"
+      ],
+      "balance_after": "1350.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "b84efa62-85fa-44bd-b1af-733c8423ace3",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-07T10:48:55.905Z",
+      "amount": "2870.00",
+      "transaction_type": "withdrawal",
+      "status": "rejected",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "0.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "b940ff91-155f-4b83-a5fe-45d078664420",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T15:11:49.259Z",
+      "amount": "500.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "22580.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "bdd592c6-a963-4b64-992e-d2e2e844f0b3",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T15:14:29.774Z",
+      "amount": "500.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "23080.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "be0eb1f9-d7e6-4f7f-8fe2-9a56e3395e07",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-08-12T11:31:07.358Z",
+      "amount": "560.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "18190.00",
+      "source": "Cash"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "bf93ad85-99d8-4e8a-bae9-700db0ed24a0",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-06T15:37:39.224Z",
+      "amount": "500.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "570.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "cef341b5-0958-44ba-8432-a8ae9a1ca897",
+    "fields": {
+      "user": [
+        "0731090360"
+      ],
+      "date": "2025-08-21T09:19:29Z",
+      "amount": "5000.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "5000.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "de45708c-fdd8-40dd-958b-d31a534dc788",
+    "fields": {
+      "user": [
+        "0721507065"
+      ],
+      "date": "2025-05-29T10:07:01Z",
+      "amount": "200.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "0.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "dead0dfe-aa89-48c9-9a71-de18cb801b42",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-05-23T23:50:21Z",
+      "amount": "100.00",
+      "transaction_type": "emergency",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "20380.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "e1c74a81-480c-47aa-9e4d-a7e4ab07af5a",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T21:10:50.875Z",
+      "amount": "1000.00",
+      "transaction_type": "withdrawal",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "16380.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "e4c899a4-3861-4e43-8990-b1cae3fedd4d",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-05-22T21:00:00Z",
+      "amount": "5000.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "20380.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "ef5b6524-98bb-4085-929b-3d218a967c85",
+    "fields": {
+      "user": [
+        "0792927652"
+      ],
+      "date": "2025-06-06T22:03:19.388Z",
+      "amount": "520.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "2870.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "f2cf2c03-0042-4dd0-b4c4-9397f3c111b7",
+    "fields": {
+      "user": [
+        "admin"
+      ],
+      "date": "2025-06-06T14:44:56.679Z",
+      "amount": "500.00",
+      "transaction_type": "deposit",
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "balance_after": "21080.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.transaction",
+    "pk": "fff393a5-33cb-466a-98af-0c46ab8f267a",
+    "fields": {
+      "user": [
+        "0703536959"
+      ],
+      "date": "2025-05-23T19:38:20Z",
+      "amount": "50.00",
+      "transaction_type": "withdrawal",
+      "status": "approved",
+      "created_by": null,
+      "balance_after": "2170.00",
+      "source": "M-pesa"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 1,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "1.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": "",
+      "guarantor1": [
+        "0757240481"
+      ],
+      "guarantor2": [
+        "0721507065"
+      ],
+      "guarantor1_confirmed": false,
+      "guarantor2_confirmed": false,
+      "treasurer_approved": false,
+      "treasurer_rejected": false,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-13T10:39:05.745Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 2,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "1.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": "",
+      "guarantor1": [
+        "0721507065"
+      ],
+      "guarantor2": [
+        "0792927652"
+      ],
+      "guarantor1_confirmed": false,
+      "guarantor2_confirmed": false,
+      "treasurer_approved": false,
+      "treasurer_rejected": false,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-13T11:16:25.107Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 3,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "1200.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": "",
+      "guarantor1": [
+        "0757240481"
+      ],
+      "guarantor2": [
+        "0731090360"
+      ],
+      "guarantor1_confirmed": false,
+      "guarantor2_confirmed": true,
+      "treasurer_approved": false,
+      "treasurer_rejected": false,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-13T11:52:01.319Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 4,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "1250.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": "",
+      "guarantor1": [
+        "0757240481"
+      ],
+      "guarantor2": [
+        "0792927652"
+      ],
+      "guarantor1_confirmed": false,
+      "guarantor2_confirmed": false,
+      "treasurer_approved": false,
+      "treasurer_rejected": false,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-13T12:03:32.301Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 5,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "200.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": "",
+      "guarantor1": [
+        "0757240481"
+      ],
+      "guarantor2": [
+        "0721507065"
+      ],
+      "guarantor1_confirmed": false,
+      "guarantor2_confirmed": false,
+      "treasurer_approved": false,
+      "treasurer_rejected": false,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-13T12:08:57.062Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 6,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "1.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": "",
+      "guarantor1": [
+        "0792927652"
+      ],
+      "guarantor2": [
+        "0731090360"
+      ],
+      "guarantor1_confirmed": false,
+      "guarantor2_confirmed": true,
+      "treasurer_approved": false,
+      "treasurer_rejected": false,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-13T12:11:40.678Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 7,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "200.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": "",
+      "guarantor1": [
+        "0731090360"
+      ],
+      "guarantor2": [
+        "0792927652"
+      ],
+      "guarantor1_confirmed": true,
+      "guarantor2_confirmed": false,
+      "treasurer_approved": false,
+      "treasurer_rejected": false,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-20T12:36:24.274Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 10,
+    "fields": {
+      "requested_by": [
+        "0731090360"
+      ],
+      "borrower": [
+        "0731090360"
+      ],
+      "amount": "10000.00",
+      "amountApproved": "10000.00",
+      "due_date": "2026-08-22",
+      "total_due": "10500.00",
+      "purpose": null,
+      "guarantor1": [
+        "0703536959"
+      ],
+      "guarantor2": [
+        "admin"
+      ],
+      "guarantor1_confirmed": true,
+      "guarantor2_confirmed": true,
+      "treasurer_approved": true,
+      "treasurer_rejected": null,
+      "status": "repaid",
+      "created_at": "2025-08-22T13:50:19.963Z",
+      "approved_at": "2025-08-22T13:53:25.981Z",
+      "amount_repaid": "10500.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 11,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "1.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": null,
+      "guarantor1": [
+        "admin"
+      ],
+      "guarantor2": [
+        "0703536959"
+      ],
+      "guarantor1_confirmed": true,
+      "guarantor2_confirmed": null,
+      "treasurer_approved": null,
+      "treasurer_rejected": null,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-23T14:26:25.060Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 12,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "4000.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": null,
+      "guarantor1": [
+        "admin"
+      ],
+      "guarantor2": [
+        "0703536959"
+      ],
+      "guarantor1_confirmed": true,
+      "guarantor2_confirmed": null,
+      "treasurer_approved": null,
+      "treasurer_rejected": null,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-24T05:15:34.511Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 13,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "4000.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": null,
+      "guarantor1": [
+        "admin"
+      ],
+      "guarantor2": [
+        "0703536959"
+      ],
+      "guarantor1_confirmed": true,
+      "guarantor2_confirmed": null,
+      "treasurer_approved": null,
+      "treasurer_rejected": null,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-24T05:18:42.027Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 14,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "400.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": null,
+      "guarantor1": [
+        "admin"
+      ],
+      "guarantor2": [
+        "0703536959"
+      ],
+      "guarantor1_confirmed": true,
+      "guarantor2_confirmed": null,
+      "treasurer_approved": null,
+      "treasurer_rejected": null,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-24T05:21:17.880Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 15,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "admin"
+      ],
+      "amount": "1000.00",
+      "amountApproved": "0.00",
+      "due_date": null,
+      "total_due": "0.00",
+      "purpose": null,
+      "guarantor1": [
+        "admin"
+      ],
+      "guarantor2": [
+        "0703536959"
+      ],
+      "guarantor1_confirmed": true,
+      "guarantor2_confirmed": null,
+      "treasurer_approved": null,
+      "treasurer_rejected": null,
+      "status": "pending_guarantors",
+      "created_at": "2025-08-24T05:29:25.089Z",
+      "approved_at": null,
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrequest",
+    "pk": 16,
+    "fields": {
+      "requested_by": [
+        "admin"
+      ],
+      "borrower": [
+        "0731090360"
+      ],
+      "amount": "5000.00",
+      "amountApproved": "5000.00",
+      "due_date": "2026-08-24",
+      "total_due": "5250.00",
+      "purpose": null,
+      "guarantor1": [
+        "admin"
+      ],
+      "guarantor2": [
+        "0703536959"
+      ],
+      "guarantor1_confirmed": true,
+      "guarantor2_confirmed": true,
+      "treasurer_approved": true,
+      "treasurer_rejected": null,
+      "status": "approved",
+      "created_at": "2025-08-24T05:55:34.947Z",
+      "approved_at": "2025-08-24T07:29:52.373Z",
+      "amount_repaid": "0.00"
+    }
+  },
+  {
+    "model": "sacco.loanrepayment",
+    "pk": 1,
+    "fields": {
+      "loan": 10,
+      "amount_paid": "2500.00",
+      "payment_date": "2025-08-22T17:18:05.338Z",
+      "installment_number": null,
+      "method": "cash",
+      "balance_after_payment": "8000.00",
+      "penalty": "0.00",
+      "notes": null,
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "approved_by": [
+        "admin"
+      ],
+      "approved_at": null
+    }
+  },
+  {
+    "model": "sacco.loanrepayment",
+    "pk": 2,
+    "fields": {
+      "loan": 10,
+      "amount_paid": "8000.00",
+      "payment_date": "2025-08-22T19:27:37.199Z",
+      "installment_number": null,
+      "method": "cash",
+      "balance_after_payment": "0.00",
+      "penalty": "0.00",
+      "notes": null,
+      "status": "approved",
+      "created_by": [
+        "admin"
+      ],
+      "approved_by": [
+        "admin"
+      ],
+      "approved_at": null
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 1,
+    "fields": {
+      "loan": 7,
+      "guarantor": [
+        "0731090360"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-20T13:42:36.502Z"
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 3,
+    "fields": {
+      "loan": 6,
+      "guarantor": [
+        "0731090360"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-21T17:26:04.850Z"
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 4,
+    "fields": {
+      "loan": 3,
+      "guarantor": [
+        "0731090360"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-21T17:26:25.948Z"
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 8,
+    "fields": {
+      "loan": 10,
+      "guarantor": [
+        "0703536959"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-22T13:51:35.657Z"
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 9,
+    "fields": {
+      "loan": 10,
+      "guarantor": [
+        "admin"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-22T13:51:55.880Z"
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 10,
+    "fields": {
+      "loan": 11,
+      "guarantor": [
+        "admin"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-24T05:13:44.324Z"
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 11,
+    "fields": {
+      "loan": 16,
+      "guarantor": [
+        "admin"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-24T06:10:11.950Z"
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 12,
+    "fields": {
+      "loan": 15,
+      "guarantor": [
+        "admin"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-24T06:20:56.042Z"
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 13,
+    "fields": {
+      "loan": 14,
+      "guarantor": [
+        "admin"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-24T06:29:51.717Z"
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 14,
+    "fields": {
+      "loan": 13,
+      "guarantor": [
+        "admin"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-24T06:35:58.303Z"
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 15,
+    "fields": {
+      "loan": 12,
+      "guarantor": [
+        "admin"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-24T06:36:18.513Z"
+    }
+  },
+  {
+    "model": "sacco.loanguarantoraction",
+    "pk": 16,
+    "fields": {
+      "loan": 16,
+      "guarantor": [
+        "0703536959"
+      ],
+      "confirmed": true,
+      "action_date": "2025-08-24T06:37:51.858Z"
+    }
+  }
+]

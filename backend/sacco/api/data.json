@@ -1,0 +1,3507 @@
+[
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sacco",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sacco",
+        "model": "balance"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sacco",
+        "model": "transaction"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sacco",
+        "model": "emergencyfund"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sacco",
+        "model": "loan"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sacco",
+        "model": "loanguarantor"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sacco",
+        "model": "passwordresetotp"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sacco",
+        "model": "loanrequest"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sacco",
+        "model": "loanrepayment"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sacco",
+        "model": "loanguarantoraction"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "27ue24g2muzu2pz30h6ipulmbw5wmj95",
+    "fields": {
+        "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1uJrPi:esFDSB7usyFgYl-JBZQGpw0GF_uNNqU5qUNaKCVXbd8",
+        "expire_date": "2025-06-10T10:20:06.955Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "4k3jv4xvlecd5rambuqo2w5mzmcau6t1",
+    "fields": {
+        "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1t0jyh:YLpcSZ5_4KoQeX0-a768w0_3U-GxzS8c2BrVB4XNUlc",
+        "expire_date": "2024-10-29T16:00:55.212Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "7nq0k6vyah2jguq28zrzjruyep192wp5",
+    "fields": {
+        "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1upXAE:G0Z_3hGaOSgvPfm8oXyutjdbsB-8qX1HpXr_B_HZB0o",
+        "expire_date": "2025-09-05T19:11:02.551Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "9wd82ngo8h6po1o4auqxcruh44t35szy",
+    "fields": {
+        "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1sx6DQ:h7ILQF9EpCfnjsC6ff9q4R6nOQVMDWhN8SvNqBRCFJ8",
+        "expire_date": "2024-10-19T14:57:04.422Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "jotl4tbswzpoxt2fhl4exk937rebwxuf",
+    "fields": {
+        "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1ukjRn:CYu-vToNEfAbCYx_BSAAd_jFibAdjc4Ynai8sOKfMFk",
+        "expire_date": "2025-08-23T13:17:19.516Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "k9f9yzfqg8p6h5gc60wu7komih2abvl5",
+    "fields": {
+        "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1uNdF2:jElg4U60IVBCTw4MMmpLwiLBDuqn86WyHUkjGphP9rw",
+        "expire_date": "2025-06-20T20:00:40.423Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "nucx46xpg6tp4pc11crlidrj764d7y8i",
+    "fields": {
+        "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1uIXWd:mfLuZrOQSqPLRpLGczofRQBFppaRYuqk2dr91Y5rF-k",
+        "expire_date": "2025-06-06T18:53:47.333Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "r5j9vtss7w67x8nfza105f153wqyri6c",
+    "fields": {
+        "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1uKa5X:962gtqqdwenSMe04bcUmko-Km091kiOJz-vxtC7PEP8",
+        "expire_date": "2025-06-12T10:02:15.801Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "w9n5tofzezawupfnd73fc9d659bkz3ov",
+    "fields": {
+        "session_data": ".eJxVjLsKwkAQRf9la1nY10zWUmwFLa3C7OzExEcCeaAg_rtRUmh7zzn3qUqaxrqcBunLJqu1yv62Hff34-FBpFa_OBFfpP06Z2pPneauHfsm6Y-iFzroXZflulncv4OahnquvQsExKaINrC1AcEklArZOY-xEIvGZKi8OEoQcgZOUTAxIMR5ZvV6A65yO_Q:1swgCM:NCp7-Ck7Yx5SIbY6W5SiV-SWr9kdRjCjD1nNlUUhCxI",
+        "expire_date": "2024-10-18T11:10:14.010Z"
+    }
+},
+{
+    "model": "sacco.emergencyfund",
+    "pk": 1,
+    "fields": {
+        "balance": "800.00"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add user",
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change user",
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete user",
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view user",
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "codename": "view_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add balance",
+        "content_type": [
+            "sacco",
+            "balance"
+        ],
+        "codename": "add_balance"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change balance",
+        "content_type": [
+            "sacco",
+            "balance"
+        ],
+        "codename": "change_balance"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete balance",
+        "content_type": [
+            "sacco",
+            "balance"
+        ],
+        "codename": "delete_balance"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view balance",
+        "content_type": [
+            "sacco",
+            "balance"
+        ],
+        "codename": "view_balance"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add transaction",
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "codename": "add_transaction"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change transaction",
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "codename": "change_transaction"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete transaction",
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "codename": "delete_transaction"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view transaction",
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "codename": "view_transaction"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add emergency fund",
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "codename": "add_emergencyfund"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change emergency fund",
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "codename": "change_emergencyfund"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete emergency fund",
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "codename": "delete_emergencyfund"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view emergency fund",
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "codename": "view_emergencyfund"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add loan",
+        "content_type": [
+            "sacco",
+            "loan"
+        ],
+        "codename": "add_loan"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change loan",
+        "content_type": [
+            "sacco",
+            "loan"
+        ],
+        "codename": "change_loan"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete loan",
+        "content_type": [
+            "sacco",
+            "loan"
+        ],
+        "codename": "delete_loan"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view loan",
+        "content_type": [
+            "sacco",
+            "loan"
+        ],
+        "codename": "view_loan"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add loan guarantor",
+        "content_type": [
+            "sacco",
+            "loanguarantor"
+        ],
+        "codename": "add_loanguarantor"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change loan guarantor",
+        "content_type": [
+            "sacco",
+            "loanguarantor"
+        ],
+        "codename": "change_loanguarantor"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete loan guarantor",
+        "content_type": [
+            "sacco",
+            "loanguarantor"
+        ],
+        "codename": "delete_loanguarantor"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view loan guarantor",
+        "content_type": [
+            "sacco",
+            "loanguarantor"
+        ],
+        "codename": "view_loanguarantor"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add password reset otp",
+        "content_type": [
+            "sacco",
+            "passwordresetotp"
+        ],
+        "codename": "add_passwordresetotp"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change password reset otp",
+        "content_type": [
+            "sacco",
+            "passwordresetotp"
+        ],
+        "codename": "change_passwordresetotp"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete password reset otp",
+        "content_type": [
+            "sacco",
+            "passwordresetotp"
+        ],
+        "codename": "delete_passwordresetotp"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view password reset otp",
+        "content_type": [
+            "sacco",
+            "passwordresetotp"
+        ],
+        "codename": "view_passwordresetotp"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add loan request",
+        "content_type": [
+            "sacco",
+            "loanrequest"
+        ],
+        "codename": "add_loanrequest"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change loan request",
+        "content_type": [
+            "sacco",
+            "loanrequest"
+        ],
+        "codename": "change_loanrequest"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete loan request",
+        "content_type": [
+            "sacco",
+            "loanrequest"
+        ],
+        "codename": "delete_loanrequest"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view loan request",
+        "content_type": [
+            "sacco",
+            "loanrequest"
+        ],
+        "codename": "view_loanrequest"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add loan repayment",
+        "content_type": [
+            "sacco",
+            "loanrepayment"
+        ],
+        "codename": "add_loanrepayment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change loan repayment",
+        "content_type": [
+            "sacco",
+            "loanrepayment"
+        ],
+        "codename": "change_loanrepayment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete loan repayment",
+        "content_type": [
+            "sacco",
+            "loanrepayment"
+        ],
+        "codename": "delete_loanrepayment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view loan repayment",
+        "content_type": [
+            "sacco",
+            "loanrepayment"
+        ],
+        "codename": "view_loanrepayment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add loan guarantor action",
+        "content_type": [
+            "sacco",
+            "loanguarantoraction"
+        ],
+        "codename": "add_loanguarantoraction"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change loan guarantor action",
+        "content_type": [
+            "sacco",
+            "loanguarantoraction"
+        ],
+        "codename": "change_loanguarantoraction"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete loan guarantor action",
+        "content_type": [
+            "sacco",
+            "loanguarantoraction"
+        ],
+        "codename": "delete_loanguarantoraction"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view loan guarantor action",
+        "content_type": [
+            "sacco",
+            "loanguarantoraction"
+        ],
+        "codename": "view_loanguarantoraction"
+    }
+},
+{
+    "model": "sacco.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$tSdQAEIkcyib1ovJrmEzHZ$KP1UcClEikCAjdeklCmlerZBuqLb8PWJM8vAwbEVwoU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "0792927652",
+        "is_staff": false,
+        "date_joined": "2025-06-06T13:01:46Z",
+        "dob": "2003-06-27",
+        "first_name": "Alvin",
+        "last_name": "Okal",
+        "phoneNumber": "0792927652",
+        "email": "",
+        "is_active": true,
+        "is_admin": false,
+        "is_secretary": false,
+        "is_tresurer": false,
+        "is_approved": true,
+        "date_Approved": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sacco.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$JdbLRXeOfqLwUBoMeqhVjm$89HU1O13p5EChou/Rf97nb7tWZeXqlD9nWrgOKLRIus=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "0721507065",
+        "is_staff": false,
+        "date_joined": "2025-05-29T10:04:44Z",
+        "dob": "1993-04-07",
+        "first_name": "Stephen",
+        "last_name": "Wankara",
+        "phoneNumber": "0721507065",
+        "email": "",
+        "is_active": true,
+        "is_admin": false,
+        "is_secretary": false,
+        "is_tresurer": false,
+        "is_approved": true,
+        "date_Approved": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sacco.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$eIsqpy3UCdVcuGorz2M3Nj$dsSNgRjlomOcnoA/dH+f6FU+z6OVJgLUUAXbV47skR8=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "0731090360",
+        "is_staff": false,
+        "date_joined": "2025-08-11T12:14:35.094Z",
+        "dob": "1981-07-15",
+        "first_name": "Roseline",
+        "last_name": "Okinyo",
+        "phoneNumber": "0731090360",
+        "email": null,
+        "is_active": true,
+        "is_admin": false,
+        "is_secretary": false,
+        "is_tresurer": false,
+        "is_approved": true,
+        "date_Approved": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sacco.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$VpIcKaBFF84CLwDJjWmAQY$Xxi6Dqt31tb/ZA/SZ56fwe4tgULEBjjDLuDInxb41H0=",
+        "last_login": "2025-08-22T19:11:02.526Z",
+        "is_superuser": true,
+        "username": "admin",
+        "is_staff": true,
+        "date_joined": "2024-10-04T10:38:28Z",
+        "dob": null,
+        "first_name": "MAXWEL",
+        "last_name": "OKINYO",
+        "phoneNumber": "0746950699",
+        "email": "admin@gmail.com",
+        "is_active": true,
+        "is_admin": true,
+        "is_secretary": true,
+        "is_tresurer": true,
+        "is_approved": true,
+        "date_Approved": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sacco.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$GnUWnad5Anv7vvWtWMLbtc$EcF7ao1XIDe2hy12K2R3QuWfd8TcLv2wbKDUM0Odhso=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "0000000000",
+        "is_staff": false,
+        "date_joined": "2025-05-23T23:37:19Z",
+        "dob": "2006-02-02",
+        "first_name": "Gordon",
+        "last_name": "Random",
+        "phoneNumber": "0000000000",
+        "email": "",
+        "is_active": true,
+        "is_admin": false,
+        "is_secretary": false,
+        "is_tresurer": true,
+        "is_approved": true,
+        "date_Approved": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sacco.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$wdFGaI8juu6nyyk6C2BTmX$FUlkMmG8WxoCCJXCgKBAB7NSsduxxt1vZ4IeZz5gaQs=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "0757240481",
+        "is_staff": false,
+        "date_joined": "2024-10-04T21:47:55.303Z",
+        "dob": "1999-11-10",
+        "first_name": "Rachael",
+        "last_name": "Mwangi",
+        "phoneNumber": "0757240481",
+        "email": null,
+        "is_active": true,
+        "is_admin": false,
+        "is_secretary": false,
+        "is_tresurer": false,
+        "is_approved": false,
+        "date_Approved": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sacco.user",
+    "fields": {
+        "password": "pbkdf2_sha256$870000$t6kQjgO15uRDbPSuH8xmdS$bIIhTIB8Op5TfNRSDGEPMFlx4/Fzcay8r0GSRI/gEsw=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "0703536959",
+        "is_staff": true,
+        "date_joined": "2024-10-04T21:40:53Z",
+        "dob": "1998-07-10",
+        "first_name": "Maxwel",
+        "last_name": "omondi",
+        "phoneNumber": "0703536959",
+        "email": "",
+        "is_active": true,
+        "is_admin": true,
+        "is_secretary": true,
+        "is_tresurer": true,
+        "is_approved": true,
+        "date_Approved": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sacco.balance",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "balance": "30320.00",
+        "lastEdited": "2025-08-24T07:49:57.042Z"
+    }
+},
+{
+    "model": "sacco.balance",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "0703536959"
+        ],
+        "balance": "2770.00",
+        "lastEdited": "2025-08-24T07:49:58.138Z"
+    }
+},
+{
+    "model": "sacco.balance",
+    "pk": 3,
+    "fields": {
+        "user": [
+            "0757240481"
+        ],
+        "balance": "0.00",
+        "lastEdited": "2024-10-04T21:47:55.794Z"
+    }
+},
+{
+    "model": "sacco.balance",
+    "pk": 6,
+    "fields": {
+        "user": [
+            "0000000000"
+        ],
+        "balance": "300.00",
+        "lastEdited": "2025-06-02T16:07:26.450Z"
+    }
+},
+{
+    "model": "sacco.balance",
+    "pk": 8,
+    "fields": {
+        "user": [
+            "0721507065"
+        ],
+        "balance": "200.00",
+        "lastEdited": "2025-05-29T10:08:03.429Z"
+    }
+},
+{
+    "model": "sacco.balance",
+    "pk": 9,
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "balance": "1330.00",
+        "lastEdited": "2025-08-24T07:49:59.678Z"
+    }
+},
+{
+    "model": "sacco.balance",
+    "pk": 10,
+    "fields": {
+        "user": [
+            "0731090360"
+        ],
+        "balance": "5000.00",
+        "lastEdited": "2025-08-21T09:20:29.367Z"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "05b48031-1d5e-49d7-ad02-36444c09a43a",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T20:53:26.390Z",
+        "amount": "1000.00",
+        "transaction_type": "withdrawal",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "32320.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "079e741d-e95a-40a8-b855-35e4452f72da",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T21:09:34.651Z",
+        "amount": "1000.00",
+        "transaction_type": "withdrawal",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "31320.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "0ae9f7f8-4467-492c-99c7-3beb2cb04eab",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2024-10-04T12:13:29Z",
+        "amount": "10.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "0.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "0d23b73c-6be1-4698-8693-6605ce08dd08",
+    "fields": {
+        "user": [
+            "0703536959"
+        ],
+        "date": "2025-06-06T12:51:23.629Z",
+        "amount": "200.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "0703536959"
+        ],
+        "balance_after": "2370.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "1622ca07-d763-4a0e-b3a5-f014ab297a0c",
+    "fields": {
+        "user": [
+            "0703536959"
+        ],
+        "date": "2025-08-12T11:34:03.567Z",
+        "amount": "970.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "2220.00",
+        "source": "Cash"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "16cb0ef6-cb5a-4eb4-91f2-96fc9b70a132",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T20:28:52.596Z",
+        "amount": "2560.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "30760.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "1d364b08-8947-40e0-8651-5b3c8748c315",
+    "fields": {
+        "user": [
+            "0000000000"
+        ],
+        "date": "2025-06-02T16:05:41Z",
+        "amount": "300.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "300.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "1ef37616-69b2-4f8a-b4af-8789f67edf04",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-08-12T11:23:42.174Z",
+        "amount": "8000.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "17530.00",
+        "source": "Cash"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "20082e32-ce04-467a-a6f8-eafec30ddb4c",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-07T06:02:42.484Z",
+        "amount": "120.00",
+        "transaction_type": "withdrawal",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "2470.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "227df7ab-8f55-49ba-b16a-e664db947476",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T21:15:38.451Z",
+        "amount": "810.00",
+        "transaction_type": "withdrawal",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "17380.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-05-23T23:42:47Z",
+        "amount": "100.00",
+        "transaction_type": "emergency",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "0.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "2b1bab44-ec09-416a-89e8-2148ff38ad9f",
+    "fields": {
+        "user": [
+            "0703536959"
+        ],
+        "date": "2025-08-11T05:54:36.586Z",
+        "amount": "100.00",
+        "transaction_type": "emergency",
+        "status": "approved",
+        "created_by": [
+            "0703536959"
+        ],
+        "balance_after": "1250.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "2fa6de69-6c26-4d1d-b1c1-b776eb3192a5",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-07T11:15:49.378Z",
+        "amount": "2800.00",
+        "transaction_type": "withdrawal",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "70.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "329d9003-37f2-45f3-ba52-2ee9433ca7aa",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-06T19:13:06.203Z",
+        "amount": "1000.00",
+        "transaction_type": "withdrawal",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "810.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "3303afe3-de4e-4034-b499-5a62b09f3662",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T20:38:37.374Z",
+        "amount": "2560.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "33320.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "33968dff-9788-4587-87f6-961a0ee2b2a2",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T21:10:50.827Z",
+        "amount": "1000.00",
+        "transaction_type": "withdrawal",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "30320.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "33cb17ca-3d95-4684-bb09-27c584cb1625",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-06T22:02:11.592Z",
+        "amount": "520.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "1330.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "3db075c6-3bc9-4fad-9cbe-c23db2ec92c9",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-07T10:46:03.584Z",
+        "amount": "2870.00",
+        "transaction_type": "withdrawal",
+        "status": "rejected",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "0.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "3fad0610-dbb3-40eb-acfe-d956c99763ec",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T15:07:25.220Z",
+        "amount": "500.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "21580.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "4e4c047f-cb51-4a0e-a896-e9769f7371eb",
+    "fields": {
+        "user": [
+            "0703536959"
+        ],
+        "date": "2024-10-15T16:15:26Z",
+        "amount": "200.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": null,
+        "balance_after": "2770.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "56361a83-761c-44eb-a954-a0915c2195ef",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-08-11T06:49:19.162Z",
+        "amount": "500.00",
+        "transaction_type": "emergency",
+        "status": "approved",
+        "created_by": [
+            "0703536959"
+        ],
+        "balance_after": "9530.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "5b05b099-f7d4-4007-a784-05b7e4a28c3a",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T15:08:23.579Z",
+        "amount": "500.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "22080.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "5b7201f2-383e-41e1-a021-7f67394f3dee",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-07T06:01:57.067Z",
+        "amount": "120.00",
+        "transaction_type": "withdrawal",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "2350.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "602aab4f-bfbe-4619-ae31-ae446b00ea50",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-07T10:46:16.089Z",
+        "amount": "2870.00",
+        "transaction_type": "withdrawal",
+        "status": "rejected",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "0.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "624f917d-9ee0-4399-aa5d-a9c3e4b1b4bb",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-08-12T11:26:53.951Z",
+        "amount": "100.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "17630.00",
+        "source": "Cash"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "66fe1a0e-4fa2-40f7-83c2-15accbc47f8b",
+    "fields": {
+        "user": [
+            "0703536959"
+        ],
+        "date": "2024-10-15T16:22:12Z",
+        "amount": "200.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": null,
+        "balance_after": "2570.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "67a4f4eb-e439-478f-a8c6-15b377424cd5",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T13:13:26.470Z",
+        "amount": "200.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "20580.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "71d63821-3974-42ae-a96d-56148469e156",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T20:02:49.031Z",
+        "amount": "2560.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "25640.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "76ea4ea4-9043-4499-8e20-db9246c95772",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T20:26:01.762Z",
+        "amount": "2560.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "28200.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "7957d1a3-7277-45fa-bf94-a5001ca0362c",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T21:02:43.104Z",
+        "amount": "1000.00",
+        "transaction_type": "withdrawal",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "15380.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "810aef95-609e-4cfb-b7a7-649a8ffa7806",
+    "fields": {
+        "user": [
+            "0703536959"
+        ],
+        "date": "2025-08-11T06:46:05.342Z",
+        "amount": "200.00",
+        "transaction_type": "emergency",
+        "status": "approved",
+        "created_by": [
+            "0703536959"
+        ],
+        "balance_after": "1250.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "a0521e50-8c60-4527-a053-221966077258",
+    "fields": {
+        "user": [
+            "0703536959"
+        ],
+        "date": "2025-08-11T06:10:01.509Z",
+        "amount": "100.00",
+        "transaction_type": "emergency",
+        "status": "approved",
+        "created_by": [
+            "0703536959"
+        ],
+        "balance_after": "1250.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "a7d84fb5-f3fb-4b62-8a53-c51ebc97f3cf",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-06T15:42:15.550Z",
+        "amount": "500.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "1070.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "b31c5083-9ead-4bba-a8e2-8e3d4d418bef",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-06T15:42:57.240Z",
+        "amount": "740.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "1810.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "b3b5cffc-9b28-4de3-ba2e-75dd9d219c49",
+    "fields": {
+        "user": [
+            "0703536959"
+        ],
+        "date": "2025-08-09T13:48:37.881Z",
+        "amount": "800.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "0703536959"
+        ],
+        "balance_after": "1350.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "b84efa62-85fa-44bd-b1af-733c8423ace3",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-07T10:48:55.905Z",
+        "amount": "2870.00",
+        "transaction_type": "withdrawal",
+        "status": "rejected",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "0.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "b940ff91-155f-4b83-a5fe-45d078664420",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T15:11:49.259Z",
+        "amount": "500.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "22580.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "bdd592c6-a963-4b64-992e-d2e2e844f0b3",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T15:14:29.774Z",
+        "amount": "500.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "23080.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "be0eb1f9-d7e6-4f7f-8fe2-9a56e3395e07",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-08-12T11:31:07.358Z",
+        "amount": "560.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "18190.00",
+        "source": "Cash"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "bf93ad85-99d8-4e8a-bae9-700db0ed24a0",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-06T15:37:39.224Z",
+        "amount": "500.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "570.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "cef341b5-0958-44ba-8432-a8ae9a1ca897",
+    "fields": {
+        "user": [
+            "0731090360"
+        ],
+        "date": "2025-08-21T09:19:29Z",
+        "amount": "5000.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "5000.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "de45708c-fdd8-40dd-958b-d31a534dc788",
+    "fields": {
+        "user": [
+            "0721507065"
+        ],
+        "date": "2025-05-29T10:07:01Z",
+        "amount": "200.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "0.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "dead0dfe-aa89-48c9-9a71-de18cb801b42",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-05-23T23:50:21Z",
+        "amount": "100.00",
+        "transaction_type": "emergency",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "20380.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "e1c74a81-480c-47aa-9e4d-a7e4ab07af5a",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T21:10:50.875Z",
+        "amount": "1000.00",
+        "transaction_type": "withdrawal",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "16380.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "e4c899a4-3861-4e43-8990-b1cae3fedd4d",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-05-22T21:00:00Z",
+        "amount": "5000.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "20380.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "ef5b6524-98bb-4085-929b-3d218a967c85",
+    "fields": {
+        "user": [
+            "0792927652"
+        ],
+        "date": "2025-06-06T22:03:19.388Z",
+        "amount": "520.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "2870.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "f2cf2c03-0042-4dd0-b4c4-9397f3c111b7",
+    "fields": {
+        "user": [
+            "admin"
+        ],
+        "date": "2025-06-06T14:44:56.679Z",
+        "amount": "500.00",
+        "transaction_type": "deposit",
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "balance_after": "21080.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.transaction",
+    "pk": "fff393a5-33cb-466a-98af-0c46ab8f267a",
+    "fields": {
+        "user": [
+            "0703536959"
+        ],
+        "date": "2025-05-23T19:38:20Z",
+        "amount": "50.00",
+        "transaction_type": "withdrawal",
+        "status": "approved",
+        "created_by": null,
+        "balance_after": "2170.00",
+        "source": "M-pesa"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 1,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "1.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": "",
+        "guarantor1": [
+            "0757240481"
+        ],
+        "guarantor2": [
+            "0721507065"
+        ],
+        "guarantor1_confirmed": false,
+        "guarantor2_confirmed": false,
+        "treasurer_approved": false,
+        "treasurer_rejected": false,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-13T10:39:05.745Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 2,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "1.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": "",
+        "guarantor1": [
+            "0721507065"
+        ],
+        "guarantor2": [
+            "0792927652"
+        ],
+        "guarantor1_confirmed": false,
+        "guarantor2_confirmed": false,
+        "treasurer_approved": false,
+        "treasurer_rejected": false,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-13T11:16:25.107Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 3,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "1200.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": "",
+        "guarantor1": [
+            "0757240481"
+        ],
+        "guarantor2": [
+            "0731090360"
+        ],
+        "guarantor1_confirmed": false,
+        "guarantor2_confirmed": true,
+        "treasurer_approved": false,
+        "treasurer_rejected": false,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-13T11:52:01.319Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 4,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "1250.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": "",
+        "guarantor1": [
+            "0757240481"
+        ],
+        "guarantor2": [
+            "0792927652"
+        ],
+        "guarantor1_confirmed": false,
+        "guarantor2_confirmed": false,
+        "treasurer_approved": false,
+        "treasurer_rejected": false,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-13T12:03:32.301Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 5,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "200.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": "",
+        "guarantor1": [
+            "0757240481"
+        ],
+        "guarantor2": [
+            "0721507065"
+        ],
+        "guarantor1_confirmed": false,
+        "guarantor2_confirmed": false,
+        "treasurer_approved": false,
+        "treasurer_rejected": false,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-13T12:08:57.062Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 6,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "1.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": "",
+        "guarantor1": [
+            "0792927652"
+        ],
+        "guarantor2": [
+            "0731090360"
+        ],
+        "guarantor1_confirmed": false,
+        "guarantor2_confirmed": true,
+        "treasurer_approved": false,
+        "treasurer_rejected": false,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-13T12:11:40.678Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 7,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "200.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": "",
+        "guarantor1": [
+            "0731090360"
+        ],
+        "guarantor2": [
+            "0792927652"
+        ],
+        "guarantor1_confirmed": true,
+        "guarantor2_confirmed": false,
+        "treasurer_approved": false,
+        "treasurer_rejected": false,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-20T12:36:24.274Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 10,
+    "fields": {
+        "requested_by": [
+            "0731090360"
+        ],
+        "borrower": [
+            "0731090360"
+        ],
+        "amount": "10000.00",
+        "amountApproved": "10000.00",
+        "due_date": "2026-08-22",
+        "total_due": "10500.00",
+        "purpose": null,
+        "guarantor1": [
+            "0703536959"
+        ],
+        "guarantor2": [
+            "admin"
+        ],
+        "guarantor1_confirmed": true,
+        "guarantor2_confirmed": true,
+        "treasurer_approved": true,
+        "treasurer_rejected": null,
+        "status": "repaid",
+        "created_at": "2025-08-22T13:50:19.963Z",
+        "approved_at": "2025-08-22T13:53:25.981Z",
+        "amount_repaid": "10500.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 11,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "1.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": null,
+        "guarantor1": [
+            "admin"
+        ],
+        "guarantor2": [
+            "0703536959"
+        ],
+        "guarantor1_confirmed": true,
+        "guarantor2_confirmed": null,
+        "treasurer_approved": null,
+        "treasurer_rejected": null,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-23T14:26:25.060Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 12,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "4000.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": null,
+        "guarantor1": [
+            "admin"
+        ],
+        "guarantor2": [
+            "0703536959"
+        ],
+        "guarantor1_confirmed": true,
+        "guarantor2_confirmed": null,
+        "treasurer_approved": null,
+        "treasurer_rejected": null,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-24T05:15:34.511Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 13,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "4000.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": null,
+        "guarantor1": [
+            "admin"
+        ],
+        "guarantor2": [
+            "0703536959"
+        ],
+        "guarantor1_confirmed": true,
+        "guarantor2_confirmed": null,
+        "treasurer_approved": null,
+        "treasurer_rejected": null,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-24T05:18:42.027Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 14,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "400.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": null,
+        "guarantor1": [
+            "admin"
+        ],
+        "guarantor2": [
+            "0703536959"
+        ],
+        "guarantor1_confirmed": true,
+        "guarantor2_confirmed": null,
+        "treasurer_approved": null,
+        "treasurer_rejected": null,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-24T05:21:17.880Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 15,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "admin"
+        ],
+        "amount": "1000.00",
+        "amountApproved": "0.00",
+        "due_date": null,
+        "total_due": "0.00",
+        "purpose": null,
+        "guarantor1": [
+            "admin"
+        ],
+        "guarantor2": [
+            "0703536959"
+        ],
+        "guarantor1_confirmed": true,
+        "guarantor2_confirmed": null,
+        "treasurer_approved": null,
+        "treasurer_rejected": null,
+        "status": "pending_guarantors",
+        "created_at": "2025-08-24T05:29:25.089Z",
+        "approved_at": null,
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrequest",
+    "pk": 16,
+    "fields": {
+        "requested_by": [
+            "admin"
+        ],
+        "borrower": [
+            "0731090360"
+        ],
+        "amount": "5000.00",
+        "amountApproved": "5000.00",
+        "due_date": "2026-08-24",
+        "total_due": "5250.00",
+        "purpose": null,
+        "guarantor1": [
+            "admin"
+        ],
+        "guarantor2": [
+            "0703536959"
+        ],
+        "guarantor1_confirmed": true,
+        "guarantor2_confirmed": true,
+        "treasurer_approved": true,
+        "treasurer_rejected": null,
+        "status": "approved",
+        "created_at": "2025-08-24T05:55:34.947Z",
+        "approved_at": "2025-08-24T07:29:52.373Z",
+        "amount_repaid": "0.00"
+    }
+},
+{
+    "model": "sacco.loanrepayment",
+    "pk": 1,
+    "fields": {
+        "loan": 10,
+        "amount_paid": "2500.00",
+        "payment_date": "2025-08-22T17:18:05.338Z",
+        "installment_number": null,
+        "method": "cash",
+        "balance_after_payment": "8000.00",
+        "penalty": "0.00",
+        "notes": null,
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "approved_by": [
+            "admin"
+        ],
+        "approved_at": null
+    }
+},
+{
+    "model": "sacco.loanrepayment",
+    "pk": 2,
+    "fields": {
+        "loan": 10,
+        "amount_paid": "8000.00",
+        "payment_date": "2025-08-22T19:27:37.199Z",
+        "installment_number": null,
+        "method": "cash",
+        "balance_after_payment": "0.00",
+        "penalty": "0.00",
+        "notes": null,
+        "status": "approved",
+        "created_by": [
+            "admin"
+        ],
+        "approved_by": [
+            "admin"
+        ],
+        "approved_at": null
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 1,
+    "fields": {
+        "loan": 7,
+        "guarantor": [
+            "0731090360"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-20T13:42:36.502Z"
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 3,
+    "fields": {
+        "loan": 6,
+        "guarantor": [
+            "0731090360"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-21T17:26:04.850Z"
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 4,
+    "fields": {
+        "loan": 3,
+        "guarantor": [
+            "0731090360"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-21T17:26:25.948Z"
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 8,
+    "fields": {
+        "loan": 10,
+        "guarantor": [
+            "0703536959"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-22T13:51:35.657Z"
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 9,
+    "fields": {
+        "loan": 10,
+        "guarantor": [
+            "admin"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-22T13:51:55.880Z"
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 10,
+    "fields": {
+        "loan": 11,
+        "guarantor": [
+            "admin"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-24T05:13:44.324Z"
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 11,
+    "fields": {
+        "loan": 16,
+        "guarantor": [
+            "admin"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-24T06:10:11.950Z"
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 12,
+    "fields": {
+        "loan": 15,
+        "guarantor": [
+            "admin"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-24T06:20:56.042Z"
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 13,
+    "fields": {
+        "loan": 14,
+        "guarantor": [
+            "admin"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-24T06:29:51.717Z"
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 14,
+    "fields": {
+        "loan": 13,
+        "guarantor": [
+            "admin"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-24T06:35:58.303Z"
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 15,
+    "fields": {
+        "loan": 12,
+        "guarantor": [
+            "admin"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-24T06:36:18.513Z"
+    }
+},
+{
+    "model": "sacco.loanguarantoraction",
+    "pk": 16,
+    "fields": {
+        "loan": 16,
+        "guarantor": [
+            "0703536959"
+        ],
+        "confirmed": true,
+        "action_date": "2025-08-24T06:37:51.858Z"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2024-10-04T11:32:05.314Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "balance"
+        ],
+        "object_id": "1",
+        "object_repr": " -  - Balance: -0.03",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2024-10-04T11:32:33.547Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "balance"
+        ],
+        "object_id": "1",
+        "object_repr": " -  - Balance: 7200",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2024-10-04T12:10:59.419Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "balance"
+        ],
+        "object_id": "1",
+        "object_repr": " -  - Balance: 200",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2024-10-04T12:13:41.917Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "0ae9f7f8-4467-492c-99c7-3beb2cb04eab",
+        "object_repr": "- - 10.00 on 2024-10-04 15:13:29+03:00 (deposit)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2024-10-15T16:20:56.580Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "4e4c047f-cb51-4a0e-a896-e9769f7371eb",
+        "object_repr": "Maxwel-0703536959 - 200 on 2024-10-15 19:15:26+03:00 (deposit)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2024-10-15T16:22:25.618Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "66fe1a0e-4fa2-40f7-83c2-15accbc47f8b",
+        "object_repr": "Maxwel-0703536959 - 200 on 2024-10-15 19:22:12+03:00 (deposit)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2025-05-23T19:38:50.092Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "fff393a5-33cb-466a-98af-0c46ab8f267a",
+        "object_repr": "Maxwel-0703536959 - 50 on 2025-05-23 22:38:20+03:00 (withdrawal)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2025-05-23T19:46:59.164Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "balance"
+        ],
+        "object_id": "4",
+        "object_repr": "Tom - 0792927652 - Balance: 0.00",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2025-05-23T19:48:06.396Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "9JIYEoe1T7Op",
+        "object_repr": "Tom - 0792927652",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+        "action_time": "2025-05-23T23:31:25.228Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "0ae9f7f8-4467-492c-99c7-3beb2cb04eab",
+        "object_repr": "admin - deposit - 10.00 (approved)",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Status\", \"Created by\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+        "action_time": "2025-05-23T23:32:48.943Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "d4mDtPwYQxaa",
+        "object_repr": "MAXWEL - admin",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"PhoneNumber\", \"Is approved\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+        "action_time": "2025-05-23T23:35:10.884Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "zfAJsaMASSye",
+        "object_repr": "Maxwel - 0703536959",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is approved\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+        "action_time": "2025-05-23T23:44:01.210Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+        "object_repr": "admin - emergency - 100 (pending)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+        "action_time": "2025-05-23T23:44:21.373Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+        "object_repr": "admin - emergency - 100.00 (approved)",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+        "action_time": "2025-05-23T23:46:52.415Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "object_id": "2",
+        "object_repr": "admin Emergency Fund: 0.0",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+        "action_time": "2025-05-23T23:47:11.410Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "object_id": "3",
+        "object_repr": "0703536959 Emergency Fund: 0.0",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+        "action_time": "2025-05-23T23:47:34.079Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "object_id": "4",
+        "object_repr": "0792927652 Emergency Fund: 0.0",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+        "action_time": "2025-05-23T23:47:48.975Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "object_id": "5",
+        "object_repr": "0757240481 Emergency Fund: 0.0",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+        "action_time": "2025-05-23T23:49:01.550Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+        "object_repr": "admin - emergency - 100.00 (approved)",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+        "action_time": "2025-05-23T23:49:24.359Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+        "object_repr": "admin - emergency - 100.00 (pending)",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+        "action_time": "2025-05-23T23:49:53.838Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "28cefee8-2814-40aa-be29-3d4bf581afbf",
+        "object_repr": "admin - emergency - 100.00 (approved)",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+        "action_time": "2025-05-23T23:50:53.324Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "dead0dfe-aa89-48c9-9a71-de18cb801b42",
+        "object_repr": "admin - emergency - 100 (pending)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+        "action_time": "2025-05-24T00:25:22.332Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "zfAJsaMASSye",
+        "object_repr": "Maxwel - 0703536959",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is secretary\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+        "action_time": "2025-05-24T00:26:31.621Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "d4mDtPwYQxaa",
+        "object_repr": "MAXWEL - admin",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is secretary\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+        "action_time": "2025-05-27T10:24:03.568Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "s_NbE25SSz-k",
+        "object_repr": "Gordon - 0000000000",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is active\", \"Is approved\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+        "action_time": "2025-05-27T12:16:41.304Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "s_NbE25SSz-k",
+        "object_repr": "Gordon - 0000000000",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is tresurer\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+        "action_time": "2025-05-29T10:02:54.414Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "PmQ-D0VYSJKv",
+        "object_repr": "Stephen - 721507065",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is active\", \"Is approved\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+        "action_time": "2025-05-29T10:03:21.206Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "PmQ-D0VYSJKv",
+        "object_repr": "Stephen - 721507065",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+        "action_time": "2025-05-29T10:05:43.033Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "VI8x0OciRwyH",
+        "object_repr": "Stephen - 0721507065",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is active\", \"Is approved\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 30,
+    "fields": {
+        "action_time": "2025-05-29T10:07:23.131Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "de45708c-fdd8-40dd-958b-d31a534dc788",
+        "object_repr": "0721507065 - deposit - 200 (approved)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 31,
+    "fields": {
+        "action_time": "2025-05-29T10:08:03.431Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "balance"
+        ],
+        "object_id": "8",
+        "object_repr": "Stephen - 0721507065 - Balance: 200",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 32,
+    "fields": {
+        "action_time": "2025-06-02T16:06:14.515Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "1d364b08-8947-40e0-8651-5b3c8748c315",
+        "object_repr": "0000000000 - deposit - 300 (approved)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 33,
+    "fields": {
+        "action_time": "2025-06-02T16:07:26.451Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "balance"
+        ],
+        "object_id": "6",
+        "object_repr": "Gordon - 0000000000 - Balance: 300",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 34,
+    "fields": {
+        "action_time": "2025-06-06T12:40:10.231Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "zfAJsaMASSye",
+        "object_repr": "Maxwel - 0703536959",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is admin\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 35,
+    "fields": {
+        "action_time": "2025-06-06T12:57:02.416Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "V8BUwpcEQq60",
+        "object_repr": "Tom - 0792927652",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 36,
+    "fields": {
+        "action_time": "2025-06-06T12:59:55.662Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "d4mDtPwYQxaa",
+        "object_repr": "MAXWEL - admin",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 37,
+    "fields": {
+        "action_time": "2025-06-06T13:06:15.973Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "SBNNV9dUSKKB",
+        "object_repr": "Alvin - 0792927652",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is active\", \"Is approved\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+        "action_time": "2025-06-07T08:21:36.539Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "zfAJsaMASSye",
+        "object_repr": "Maxwel - 0703536959",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Staff status\", \"Is secretary\", \"Is tresurer\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 39,
+    "fields": {
+        "action_time": "2025-06-07T09:16:24.042Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "zfAJsaMASSye",
+        "object_repr": "Maxwel - 0703536959",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 40,
+    "fields": {
+        "action_time": "2025-08-09T13:17:58.858Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "d4mDtPwYQxaa",
+        "object_repr": "MAXWEL - admin",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is admin\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 41,
+    "fields": {
+        "action_time": "2025-08-09T13:41:06.424Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "zfAJsaMASSye",
+        "object_repr": "Maxwel - 0703536959",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is secretary\", \"Is tresurer\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 42,
+    "fields": {
+        "action_time": "2025-08-09T13:49:31.991Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "zfAJsaMASSye",
+        "object_repr": "Maxwel - 0703536959",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is tresurer\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 43,
+    "fields": {
+        "action_time": "2025-08-11T06:51:43.239Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "object_id": "8",
+        "object_repr": "Emergency Fund Balance: 0.00",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 44,
+    "fields": {
+        "action_time": "2025-08-11T06:51:43.239Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "object_id": "7",
+        "object_repr": "Emergency Fund Balance: 0.00",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 45,
+    "fields": {
+        "action_time": "2025-08-11T06:51:43.240Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "object_id": "5",
+        "object_repr": "Emergency Fund Balance: 0.00",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 46,
+    "fields": {
+        "action_time": "2025-08-11T06:51:43.240Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "object_id": "3",
+        "object_repr": "Emergency Fund Balance: 0.00",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 47,
+    "fields": {
+        "action_time": "2025-08-11T06:51:43.240Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "emergencyfund"
+        ],
+        "object_id": "2",
+        "object_repr": "Emergency Fund Balance: 0.00",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 48,
+    "fields": {
+        "action_time": "2025-08-11T14:07:53.055Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "user"
+        ],
+        "object_id": "d4mDtPwYQxaa",
+        "object_repr": "MAXWEL - admin",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Is tresurer\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 49,
+    "fields": {
+        "action_time": "2025-08-21T09:20:13.880Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "transaction"
+        ],
+        "object_id": "cef341b5-0958-44ba-8432-a8ae9a1ca897",
+        "object_repr": "0731090360 - deposit - 5000 (approved)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 50,
+    "fields": {
+        "action_time": "2025-08-21T09:20:29.368Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "balance"
+        ],
+        "object_id": "10",
+        "object_repr": "Roseline - 0731090360 - Balance: 5000.00",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Balance\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 51,
+    "fields": {
+        "action_time": "2025-08-22T08:39:47.105Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "loanrequest"
+        ],
+        "object_id": "8",
+        "object_repr": "Loan #8 for Roseline - 0731090360 - 200.00",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 52,
+    "fields": {
+        "action_time": "2025-08-22T13:49:38.644Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "sacco",
+            "loanrequest"
+        ],
+        "object_id": "9",
+        "object_repr": "Loan #9 for Roseline - 0731090360 - 1000.00",
+        "action_flag": 3,
+        "change_message": ""
+    }
+}
+]
